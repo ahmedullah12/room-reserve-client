@@ -20,7 +20,7 @@ module.exports = {
       colors: {
         primary: "#674188",
         secondary: "#C8A1E0",
-        accent: "#F7EFE5",
+        accent: "#f7e6e5",
       },
       keyframes: {
         "accordion-down": {
