@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Advertisement from "./Advertisement";
 import Banner from "./Banner";
 import HowItWorks from "./HowItWorks";
@@ -14,6 +15,7 @@ const Home = () => {
       <WhyChooseUs />
       <HowItWorks />
       <Testimonial />
+      <Footer />
     </div>
   );
 };

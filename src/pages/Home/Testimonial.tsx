@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay"
 import { reviewsData } from "@/utils/datas";
 
 const Testimonial = () => {
@@ -17,6 +18,11 @@ const Testimonial = () => {
 
       <div className="md:container px-16 md:px-[50px]">
         <Carousel
+          plugins={[
+            Autoplay({
+              delay: 2000,
+            }),
+          ]}
           opts={{
             align: "start",
           }}
@@ -55,8 +61,8 @@ const Testimonial = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="border-2 border-primary text-primary "/>
+          <CarouselNext className="border-2 border-primary text-primary"/>
         </Carousel>
       </div>
     </div>
