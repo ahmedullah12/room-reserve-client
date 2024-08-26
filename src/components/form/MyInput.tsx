@@ -12,18 +12,22 @@ type TInputProps = {
 const MyInput = ({ type, name, label, disabled }: TInputProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
-        <Label>{label}</Label>
+      <Label>{label}</Label>
       <Controller
         name={name}
-        render={({ field }) => (
-          <Input
-            className="max-w-[300px]"
-            {...field}
-            type={type}
-            id={name}
-            disabled={disabled}
-            value={field.value || ""}
-          />
+        rules={{required: `${label} is required`}}
+        render={({ field, fieldState: { error } }) => (
+          <>
+            <Input
+              className="max-w-[300px] focus:outline-none"
+              {...field}
+              type={type}
+              id={name}
+              disabled={disabled}
+              value={field.value || ""}
+            />
+            {error && <small style={{ color: "red" }}>{error.message}</small>}
+          </>
         )}
       />
     </div>
