@@ -2,9 +2,16 @@ import { Link, NavLink } from "react-router-dom";
 import { Cross as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { Menus } from "@/utils/navMenus";
+import { useAppSelector } from "@/redux/hook";
+import { useCurrentUser } from "@/redux/features/auth/authApi";
+import { BiLogIn } from "react-icons/bi";
+import { HiOutlineLogin } from "react-icons/hi";
+import UserDropdown from "../UserDropdown";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const user = useAppSelector(useCurrentUser);
+  console.log(user);
   return (
     <nav className="bg-secondary w-full fixed top-0 z-50 h-16">
       <div className="lg:container mt-2 md:mt-4 relative flex items-center justify-between px-4 md:flex md:justify-between ">
@@ -29,18 +36,26 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="hidden md:flex items-center space-x-4 relative">
-          <Link
-            to="/login"
-            className=" px-2 py-1 rounded flex items-center gap-1 text-white font-semibold text-sm lg:text-base transition-all duration-500 ease-in-out hover:bg-accent hover:text-primary"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className=" px-2 py-1 rounded flex items-center gap-1 text-white font-semibold text-sm lg:text-base transition-all duration-500 ease-in-out hover:bg-accent hover:text-primary"
-          >
-            Register
-          </Link>
+          {user ? (
+            <div>
+              <UserDropdown user={user}/>
+            </div>
+          ) : (
+            <div className="flex">
+              <Link
+                to="/login"
+                className=" px-2 py-1 rounded flex items-center gap-1 text-white font-semibold text-sm lg:text-base transition-all duration-500 ease-in-out hover:bg-accent hover:text-primary"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className=" px-2 py-1 rounded flex items-center gap-1 text-white font-semibold text-sm lg:text-base transition-all duration-500 ease-in-out hover:bg-accent hover:text-primary"
+              >
+                Register
+              </Link>
+            </div>
+          )}
         </div>
         <div className="md:hidden">
           <Hamburger color="white" toggled={open} toggle={setOpen} />
@@ -63,13 +78,21 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="mt-3 ms-2  px-4 pb-3 flex justify-between items-center relative">
-            <Link
+          <div className="mt-4 px-4 pb-3 relative">
+            <NavLink
+              className={`px-3 mb-4 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
               to="/login"
-              className="bg-primary px-2 py-1 rounded flex items-center gap-1 text-white font-semibold text-xs lg:text-base"
             >
+              <BiLogIn size={18} color="#674188" />
               Login
-            </Link>
+            </NavLink>
+            <NavLink
+              className={`ms-1 px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
+              to="/register"
+            >
+              <HiOutlineLogin size={18} color="#674188" />
+              Register
+            </NavLink>
           </div>
         </div>
       </div>

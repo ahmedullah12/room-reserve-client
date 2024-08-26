@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Separator } from "../ui/separator";
 
 const links = [
   {
@@ -42,12 +43,15 @@ const Footer = () => {
             </div>
 
             <div className="lg:w-[50%] flex flex-col gap-y-2">
-              {links.map((link) => (
-                <Link className="hover:underline" to={link.link}>{link.name}</Link>
+              {links.map((link, i) => (
+                <Link key={i} className="hover:underline" to={link.link}>
+                  {link.name}
+                </Link>
               ))}
             </div>
           </div>
-          <div className="flex justify-center space-x-6 mb-6 lg:mb-0">
+          <Separator />
+          <div className="flex justify-center space-x-6 mt-4 mb-6 lg:mb-0">
             <a href="https://facebook.com" aria-label="Facebook">
               <FaFacebookF
                 className="text-white hover:text-secondary"
@@ -75,11 +79,8 @@ const Footer = () => {
           </div>
         </div>
 
-        
         <div className="mt-10 pb-4 text-center text-sm">
-          <p>
-            &copy; 2024 Room Reserve. All rights reserved.
-          </p>
+          <p>&copy; 2024 Room Reserve. All rights reserved.</p>
         </div>
       </div>
     </footer>

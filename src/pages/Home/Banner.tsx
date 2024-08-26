@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className="bg-accent">
-      <div className="w-full lg:w-[90%] lg:mx-auto px-6 pt-[64px] pb-10 md:px-12 md:py-[100px]  lg:py-[120px]">
+      <div className="w-full lg:w-[90%] lg:mx-auto px-6 pt-[64px] pb-10 md:px-12 md:py-[100px]  lg:py-[150px]">
         <div className="w-[320px] md:w-[680px] mx-auto">
           <div>
             <h2 className="text-[32px] md:text-[50px] text-primary font-bold text-center leading-10 md:leading-[60px]">

@@ -54,7 +54,7 @@ const Login = () => {
 
           <MyForm onSubmit={onSubmit}>
             <MyInput name="email" type="text" label="Email" />
-            <MyInput name="password" type="text" label="Password" />
+            <MyInput name="password" type="password" label="Password" />
             <Button type="submit" className="bg-primary">Login</Button>
           </MyForm>
 
