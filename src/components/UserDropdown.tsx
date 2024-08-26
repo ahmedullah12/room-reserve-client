@@ -17,7 +17,7 @@ const UserDropdown = ({ user }: TUserDropdown) => {
   return (
     <div>
       <Popover>
-        <PopoverTrigger className="px-2 py-1 flex items-center gap-2 text-white rounded">
+        <PopoverTrigger className="ms-[6px] px-2 py-1 flex items-center gap-3 text-primary md:text-white rounded">
           <FaUserTie /> {user.name}
         </PopoverTrigger>
         <PopoverContent className="w-32 bg-accent border-none">

@@ -3,22 +3,23 @@ import { motion } from "framer-motion";
 const About = () => {
   return (
     <div className="">
-      {/* Our Story Section */}
-      <section className="py-16">
+      <div className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
             className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Our Story
           </motion.h2>
           <motion.p
             className="text-lg leading-8 text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Our journey began with a simple idea: to bring innovative solutions
             to everyday challenges. Over the years, we’ve grown from a small
@@ -27,24 +28,25 @@ const About = () => {
             drive to make the world a better place.
           </motion.p>
         </div>
-      </section>
+      </div>
 
-      {/* Our Mission Section */}
       <div className="py-16 bg-accent ">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
             className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Our Mission
           </motion.h2>
           <motion.p
             className="text-lg leading-8 text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Our mission is to innovate, inspire, and make a positive impact. We
             are committed to providing top-quality products and services that
@@ -55,14 +57,14 @@ const About = () => {
         </div>
       </div>
 
-      {/* Meet the Team Section */}
-      <section className="py-16">
+      <div className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
             className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Meet the Team
           </motion.h2>
@@ -71,9 +73,10 @@ const About = () => {
               <motion.div
                 key={index}
                 className="text-center p-6 rounded-lg shadow-lg bg-white dark:bg-slate-900 hover:scale-105 transition-transform"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.3 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ bounce: 0.5, duration: 1 }}
+                viewport={{ once: true }}
               >
                 <div className="h-32 w-32 mx-auto rounded-full bg-slate-300 dark:bg-slate-700 mb-4"></div>
                 <h3 className="text-xl font-semibold">{name}</h3>
@@ -86,24 +89,25 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Ending Section */}
       <div className="py-16 bg-accent">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
             className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             Join Us on Our Journey
           </motion.h2>
           <motion.p
             className="text-lg leading-8 text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ bounce: 0.5, duration: 1 }}
+            viewport={{ once: true }}
           >
             We’re always looking for talented and passionate individuals to join
             our team. If you’re interested in being a part of a dynamic and

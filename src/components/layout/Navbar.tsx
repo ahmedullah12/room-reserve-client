@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-4 relative">
           {user ? (
             <div>
-              <UserDropdown user={user}/>
+              <UserDropdown user={user} />
             </div>
           ) : (
             <div className="flex">
@@ -67,7 +67,7 @@ export default function Navbar() {
         >
           <ul className="ps-4 space-y-4">
             {Menus.map((item, idx) => (
-              <li key={idx} className="text-gray-600 hover:text-indigo-600">
+              <li key={idx} className="text-primary hover:text-secondary">
                 <NavLink
                   className={`px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
                   to={item.path}
@@ -79,20 +79,28 @@ export default function Navbar() {
             ))}
           </ul>
           <div className="mt-4 px-4 pb-3 relative">
-            <NavLink
-              className={`px-3 mb-4 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
-              to="/login"
-            >
-              <BiLogIn size={18} color="#674188" />
-              Login
-            </NavLink>
-            <NavLink
-              className={`ms-1 px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
-              to="/register"
-            >
-              <HiOutlineLogin size={18} color="#674188" />
-              Register
-            </NavLink>
+            {user ? (
+              <div>
+                <UserDropdown user={user} />
+              </div>
+            ) : (
+              <div>
+                <NavLink
+                  className={`px-3 mb-4 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
+                  to="/login"
+                >
+                  <BiLogIn size={18} color="#674188" />
+                  Login
+                </NavLink>
+                <NavLink
+                  className={`ms-1 px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded`}
+                  to="/register"
+                >
+                  <HiOutlineLogin size={18} color="#674188" />
+                  Register
+                </NavLink>
+              </div>
+            )}
           </div>
         </div>
       </div>

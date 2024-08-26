@@ -16,7 +16,7 @@ export const Menus = [
   },
   {
     title: "Contact Us",
-    path: "/contact-us",
+    path: "/contact",
     icon: <TiContacts size={18} color="#674188" />,
   },
 ];

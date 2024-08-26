@@ -1,29 +1,29 @@
 import { Controller } from "react-hook-form";
-import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 
-type TInputProps = {
+type TTextareaProps = {
   width: string;
-  type: string;
   name: string;
   label?: string;
+  rows: number;
   disabled?: boolean;
 };
 
-const MyInput = ({width, type, name, label, disabled }: TInputProps) => {
+const MyTextarea = ({ width, name, label, rows, disabled }: TTextareaProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Label>{label}</Label>
       <Controller
         name={name}
-        rules={{required: `${label} is required`}}
+        rules={{ required: `${label} is required` }}
         render={({ field, fieldState: { error } }) => (
           <>
-            <Input
+            <Textarea
               className={`${width} focus:outline-none`}
               {...field}
-              type={type}
               id={name}
+              rows={rows}
               disabled={disabled}
               value={field.value || ""}
             />
@@ -35,4 +35,4 @@ const MyInput = ({width, type, name, label, disabled }: TInputProps) => {
   );
 };
 
-export default MyInput;
+export default MyTextarea;

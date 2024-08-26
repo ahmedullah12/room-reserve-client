@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/redux/hook";
 import verifyJwt from "@/utils/verifyJwt";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -34,7 +35,13 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-accent overflow-y-auto">
+    <div className="min-h-screen flex justify-center items-center bg-accent overflow-y-auto relative">
+      <div className="absolute top-2 left-4">
+        <Link to="/" className="flex items-center gap-2">
+          <MdOutlineKeyboardBackspace color="#674188" className="mt-1" size={30}/>
+          <span className="text-xl text-primary font-semibold ">Back to Home</span>
+        </Link>
+      </div>
       <div className="w-full md:w-[500px] px-4">
         <div className="bg-white shadow-lg rounded-lg px-10 py-8">
           <h1 className="mb-6 font-semibold text-2xl text-primary">
@@ -42,11 +49,11 @@ const Register = () => {
           </h1>
 
           <MyForm onSubmit={onSubmit}>
-            <MyInput name="name" type="text" label="Name" />
-            <MyInput name="email" type="text" label="Email" />
-            <MyInput name="phone" type="text" label="Phone Number" />
-            <MyInput name="address" type="text" label="Address" />
-            <MyInput name="password" type="password" label="Password" />
+            <MyInput width="max-w-[300px]" name="name" type="text" label="Name" />
+            <MyInput width="max-w-[300px]" name="email" type="text" label="Email" />
+            <MyInput width="max-w-[300px]" name="phone" type="text" label="Phone Number" />
+            <MyInput width="max-w-[300px]" name="address" type="text" label="Address" />
+            <MyInput width="max-w-[300px]" name="password" type="password" label="Password" />
             <Button className="bg-primary ">Register</Button>
           </MyForm>
 
