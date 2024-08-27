@@ -1,17 +1,14 @@
+import { TRoom } from "@/types/global";
+
 type TParam = {
-  room: {
-    name: string;
-    capacity: number;
-    price: number;
-    image: string;
-  };
+  room: TRoom;
 };
 
 const RoomCard = ({ room }: TParam) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out">
       <img
-        src={room.image}
+        src={room.images[0]}
         alt={room.name}
         className="w-full h-40 object-cover rounded-t-lg"
       />
@@ -21,7 +18,7 @@ const RoomCard = ({ room }: TParam) => {
           Capacity: <span className="text-primary font-medium">{room.capacity}</span>
         </p>
         <p className="">
-          Price: <span className="text-primary font-medium">${room.price}</span> per slot
+          Price: <span className="text-primary font-medium">${room.pricePerSlot}</span> per slot
         </p>
         <button className="mt-4 bg-primary text-white py-1 px-3 text-[13px] font-semibold rounded-md hover:bg-secondary">
           See Details

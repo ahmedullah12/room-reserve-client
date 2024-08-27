@@ -11,7 +11,7 @@ import UserDropdown from "../UserDropdown";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const user = useAppSelector(useCurrentUser);
-  console.log(user);
+  
   return (
     <nav className="bg-secondary w-full fixed top-0 z-50 h-16">
       <div className="lg:container mt-2 md:mt-4 relative flex items-center justify-between px-4 md:flex md:justify-between ">
