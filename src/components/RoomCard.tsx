@@ -1,4 +1,5 @@
 import { TRoom } from "@/types/global";
+import { Link } from "react-router-dom";
 
 type TParam = {
   room: TRoom;
@@ -17,12 +18,12 @@ const RoomCard = ({ room }: TParam) => {
         <p className="">
           Capacity: <span className="text-primary font-medium">{room.capacity}</span>
         </p>
-        <p className="">
+        <p className="mb-4">
           Price: <span className="text-primary font-medium">${room.pricePerSlot}</span> per slot
         </p>
-        <button className="mt-4 bg-primary text-white py-1 px-3 text-[13px] font-semibold rounded-md hover:bg-secondary">
+        <Link to={`/meeting-rooms/${room._id}`} className="bg-primary text-white py-1 px-3 text-[13px] font-semibold rounded-md hover:bg-secondary">
           See Details
-        </button>
+        </Link>
       </div>
     </div>
   );

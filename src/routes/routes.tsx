@@ -7,6 +7,7 @@ import About from "@/pages/About/About";
 import Contact from "@/pages/Contact/Contact";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import MeetingRooms from "@/pages/MeetingRooms/MeetingRooms";
+import RoomDetails from "@/pages/RoomDetails/RoomDetails";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/meeting-rooms",
         element: <MeetingRooms />,
+      },
+      {
+        path: "/meeting-rooms/:id",
+        element: <RoomDetails />,
       },
       {
         path: "/about",

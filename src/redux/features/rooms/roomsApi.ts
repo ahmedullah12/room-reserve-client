@@ -18,7 +18,13 @@ const roomApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleRoom: builder.query({
+      query: (id) => ({
+        url: `/rooms/${id}`,
+        method: "GET"
+      })
+    })
   }),
 });
 
-export const { useGetAllRoomsQuery } = roomApi;
+export const { useGetAllRoomsQuery, useGetSingleRoomQuery } = roomApi;
