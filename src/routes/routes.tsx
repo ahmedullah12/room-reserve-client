@@ -9,6 +9,10 @@ import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import MeetingRooms from "@/pages/MeetingRooms/MeetingRooms";
 import RoomDetails from "@/pages/RoomDetails/RoomDetails";
 import BookingForm from "@/pages/BookingForm/BookingForm";
+import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
+import MyBookings from "@/pages/MyBookings/MyBookings";
+import DashboardLayout from "@/components/layout/DashboardLayout";
+import CreateRoom from "@/pages/Dashboard/CreateRoom";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +34,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/booking/:id",
-        element: <BookingForm/>
+        element: <BookingForm />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "/my-bookings",
+        element: <MyBookings />,
       },
       {
         path: "/about",
@@ -49,6 +61,16 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard/create-room",
+        element: <CreateRoom />,
+      },
+    ],
   },
 ]);
 

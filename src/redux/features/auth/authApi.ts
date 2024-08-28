@@ -1,4 +1,4 @@
-import baseApi from "@/redux/api/baseApi";
+import { baseApi } from "@/redux/api/baseApi";
 import { RootState } from "@/redux/store";
 
 const authApi = baseApi.injectEndpoints({

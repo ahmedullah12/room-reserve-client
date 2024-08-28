@@ -10,7 +10,8 @@ import { useGetUserDataQuery } from "@/redux/features/user/userApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactSelect, { MultiValue } from "react-select";
 
 type TSelectedOption = {
@@ -36,6 +37,7 @@ const BookingForm = () => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const slotsOptions = availableSlots?.data.map((d: any) => ({
     value: d._id,
@@ -47,18 +49,20 @@ const BookingForm = () => {
   };
 
   const handleSubmit: SubmitHandler<FieldValues> = (data) => {
-    if(selectedSlots.length === 0) return;
+    if(selectedSlots.length === 0) return toast.error("Please select a slot.");
 
     const bookingInfoData = {
       ...data,
+      roomId: id,
       roomName: roomData?.data.name,
       date: formattedDate,
       time: slotsOptions?.map((option: TSelectedOption) => option.label),
       cost: roomData?.data.pricePerSlot * slotsOptions.length,
-      slots: slotsOptions?.map((option: TSelectedOption) => option.value)
+      slots: selectedSlots?.map((option: TSelectedOption) => option.value)
     };
     
     dispatch(setBookingInfo(bookingInfoData))
+    navigate("/checkout");
   }
 
 
@@ -78,6 +82,7 @@ const BookingForm = () => {
 
         {/* Slots selection on the right */}
         <div className="lg:flex-1">
+          <p className="text-lg font-semibold mb-2">Available Slots</p>
           <ReactSelect
             value={selectedSlots}
             onChange={handleSlotsValueChange}

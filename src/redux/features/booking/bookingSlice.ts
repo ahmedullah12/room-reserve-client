@@ -1,18 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type TBookingInfo = {
-    _id: string
-    name: string
-    email: string
-    phone: string
-    role: string
-    address: string
-    __v: number
-    roomName: string
-    date: string
-    time: string[]
-    cost: number
-    slots: string[]
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: string;
+  address: string;
+  __v: number;
+  roomId: string;
+  roomName: string;
+  date: string;
+  time: string[];
+  cost: number;
+  slots: string[];
 };
 
 type TInitialState = {
@@ -28,11 +29,10 @@ const bookingSlice = createSlice({
   initialState,
   reducers: {
     setBookingInfo: (state, action) => {
-        state.bookingInfo = action.payload
-    }
+      state.bookingInfo = action.payload;
+    },
   },
 });
-
 
 export const { setBookingInfo } = bookingSlice.actions;
 export default bookingSlice.reducer;
