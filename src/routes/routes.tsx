@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
@@ -12,6 +12,7 @@ import BookingForm from "@/pages/BookingForm/BookingForm";
 import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
 import MyBookings from "@/pages/MyBookings/MyBookings";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import Rooms from "@/pages/Dashboard/Rooms"; // Import the Rooms component
 import CreateRoom from "@/pages/Dashboard/CreateRoom";
 
 const router = createBrowserRouter([
@@ -67,8 +68,16 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "/dashboard/create-room",
-        element: <CreateRoom />,
+        path: "", // Empty string path for the default route
+        element: <Navigate to="/dashboard/rooms" replace />, // Redirect to /dashboard/rooms
+      },
+      {
+        path: "/dashboard/rooms",
+        element: <Rooms />, // Show Rooms component when navigating to /dashboard/rooms
+      },
+      {
+        path: "/dashboard/rooms/create",
+        element: <CreateRoom />, // Show CreateRoom component when navigating to /dashboard/rooms/create
       },
     ],
   },
