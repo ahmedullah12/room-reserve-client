@@ -6,7 +6,7 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Rooms = () => {
-  const { data: rooms, isFetching } = useGetAllRoomsQuery(undefined);
+  const { data: rooms, isFetching } = useGetAllRoomsQuery({});
   const limitedRooms = rooms?.data.slice(0, 4)
 
   if (isFetching) return <p>Loading...</p>;

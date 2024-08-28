@@ -8,6 +8,7 @@ import Contact from "@/pages/Contact/Contact";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import MeetingRooms from "@/pages/MeetingRooms/MeetingRooms";
 import RoomDetails from "@/pages/RoomDetails/RoomDetails";
+import BookingForm from "@/pages/BookingForm/BookingForm";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/meeting-rooms/:id",
         element: <RoomDetails />,
+      },
+      {
+        path: "/booking/:id",
+        element: <BookingForm/>
       },
       {
         path: "/about",

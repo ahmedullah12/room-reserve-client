@@ -1,17 +1,12 @@
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
-import { useParams, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useParams, Link } from "react-router-dom";
 import RoomDetailsImageCarousel from "@/components/RoomDetailsImageCarouse";
 
 const RoomDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const { data: roomData, isLoading } = useGetSingleRoomQuery(id);
 
-  const handleBookNow = () => {
-    navigate(`/booking/${id}`);
-  };
   if (isLoading) return <p>Loading...</p>;
   return (
     <div className="pt-10 md:pt-20 pb-4 lg:container mx-auto px-6 md:px-12">
@@ -56,12 +51,9 @@ const RoomDetails = () => {
           </div>
 
           <div>
-            <Button
-              onClick={handleBookNow}
-              className="bg-primary hover:bg-secondary mt-4"
-            >
-              Book Now
-            </Button>
+            <Link to={`/booking/${id}`} className="px-3 py-2 bg-primary text-white rounded-md hover:bg-secondary ">
+              Book now
+            </Link>
           </div>
         </div>
       </div>
