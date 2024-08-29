@@ -53,7 +53,7 @@ interface RoomImagesCarouselProps {
         <CarouselNext />
       </Carousel>
       <div className="py-2 text-center text-sm text-muted-foreground">
-        Slide {current} of {count}
+        image {current} of {count}
       </div>
     </div>
   );

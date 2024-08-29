@@ -1,13 +1,23 @@
+import DeleteModal from "@/components/modals/DeleteModal";
 import { Button } from "@/components/ui/button";
-import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
+import {
+  useDeleteRoomMutation,
+  useGetAllRoomsQuery,
+} from "@/redux/features/rooms/roomsApi";
 import { TRoom } from "@/types/global";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Rooms = () => {
   const { data: rooms, isLoading } = useGetAllRoomsQuery({});
-  console.log(rooms);
-  if (isLoading) return <p>Loading....</p>;
+  const [deleteRoom] = useDeleteRoomMutation();
 
+  const handleDeleteRoom = async (id: string) => {
+    await deleteRoom(id);
+    toast.success("Room is deleted successfully!!!");
+  };
+
+  if (isLoading) return <p>Loading....</p>;
   return (
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-4">Room List</h1>
@@ -51,14 +61,25 @@ const Rooms = () => {
                 </td>
                 <td className="py-2 px-4 border-b border-r">
                   <Link
-                    to={`/dashboard/rooms/update/${room._id}`}
-                    className="mr-2 mb-1 md:mb-0 px-2 py-1 bg-primary text-sm text-white rounded hover:bg-secondary"
+                    to={`${
+                      room.isDeleted
+                        ? ""
+                        : `/dashboard/rooms/update/${room._id}`
+                    }`}
+                    className={`mr-2 mb-1 md:mb-0 px-2 py-1 ${
+                      room.isDeleted
+                        ? "bg-gray-300"
+                        : "bg-primary hover:bg-secondary"
+                    } text-sm text-white rounded `}
                   >
                     Update
                   </Link>
-                  <button className="px-2 py-1 bg-red-500 text-sm text-white rounded hover:bg-red-600">
-                    Delete
-                  </button>
+                  <DeleteModal
+                    title={`Delete ${room.name}`}
+                    id={room._id}
+                    method={handleDeleteRoom}
+                    isDeleted={room.isDeleted}
+                  />
                 </td>
               </tr>
             ))}

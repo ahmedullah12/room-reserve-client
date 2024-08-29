@@ -17,9 +17,11 @@ const Rooms = () => {
           Featured Rooms
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {limitedRooms?.map((room: TRoom, index: number) => (
-            <RoomCard key={index} room={room} />
-          ))}
+          {limitedRooms
+            ?.filter((room: TRoom) => !room.isDeleted)
+            .map((room: TRoom, index: number) => (
+              <RoomCard key={index} room={room} />
+            ))}
         </div>
         <div className="flex justify-center mt-12">
           <Link to="/meeting-rooms">
