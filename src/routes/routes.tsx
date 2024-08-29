@@ -15,6 +15,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import Rooms from "@/pages/Dashboard/Rooms"; // Import the Rooms component
 import CreateRoom from "@/pages/Dashboard/CreateRoom";
 import UpdateRoom from "@/pages/Dashboard/UpdateRoom";
+import Slots from "@/pages/Dashboard/Slots";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/rooms/update/:id",
         element: <UpdateRoom />,
+      },
+      {
+        path: "/dashboard/slots",
+        element: <Slots />, 
       },
     ],
   },

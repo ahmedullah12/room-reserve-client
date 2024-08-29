@@ -18,7 +18,6 @@ const sidebarSections = [
     key: "slots",
     items: [
       { name: "Slots List", path: "/dashboard/slots" },
-      { name: "Create Slot", path: "/dashboard/slots/create" },
     ],
   },
   {

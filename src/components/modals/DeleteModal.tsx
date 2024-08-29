@@ -37,7 +37,7 @@ const DeleteModal = ({ title, id, method, isDeleted }: TDeletePayload) => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={() => method(id)}>Delete</Button>
+          <Button className="bg-primary" onClick={() => method(id)}>Delete</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -26,3 +26,13 @@ export type TRoom = {
   __v: number;
   images: string[];
 };
+
+export type TSlot = {
+  _id: string;
+  room: TRoom;
+  date: string;
+  startTime: string;
+  endTime: string;
+  isBooked: boolean;
+  __v: number;
+};
