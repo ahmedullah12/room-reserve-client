@@ -21,11 +21,21 @@ const Rooms = () => {
         <table className="min-w-full bg-white border border-gray-200">
           <thead className="bg-accent ">
             <tr>
-              <th className="py-2 px-4 border-b text-start font-semibold text-sm">Room Name</th>
-              <th className="py-2 px-4 border-b text-start font-semibold text-sm">Room No.</th>
-              <th className="py-2 px-4 border-b text-start font-semibold text-sm">Floor No.</th>
-              <th className="py-2 px-4 border-b text-start font-semibold text-sm">Capacity</th>
-              <th className="py-2 px-4 border-b text-start font-semibold text-sm">Price Per Slot</th>
+              <th className="py-2 px-4 border-b text-start font-semibold text-sm">
+                Room Name
+              </th>
+              <th className="py-2 px-4 border-b text-start font-semibold text-sm">
+                Room No.
+              </th>
+              <th className="py-2 px-4 border-b text-start font-semibold text-sm">
+                Floor No.
+              </th>
+              <th className="py-2 px-4 border-b text-start font-semibold text-sm">
+                Capacity
+              </th>
+              <th className="py-2 px-4 border-b text-start font-semibold text-sm">
+                Price Per Slot
+              </th>
               <th className="py-2 px-4 border-b text-start font-semibold text-sm"></th>
             </tr>
           </thead>
@@ -40,9 +50,12 @@ const Rooms = () => {
                   {room.pricePerSlot}
                 </td>
                 <td className="py-2 px-4 border-b border-r">
-                  <button className="mr-2 mb-1 md:mb-0 px-2 py-1 bg-primary text-sm text-white rounded hover:bg-secondary">
+                  <Link
+                    to={`/dashboard/rooms/update/${room._id}`}
+                    className="mr-2 mb-1 md:mb-0 px-2 py-1 bg-primary text-sm text-white rounded hover:bg-secondary"
+                  >
                     Update
-                  </button>
+                  </Link>
                   <button className="px-2 py-1 bg-red-500 text-sm text-white rounded hover:bg-red-600">
                     Delete
                   </button>

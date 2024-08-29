@@ -14,6 +14,7 @@ import MyBookings from "@/pages/MyBookings/MyBookings";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import Rooms from "@/pages/Dashboard/Rooms"; // Import the Rooms component
 import CreateRoom from "@/pages/Dashboard/CreateRoom";
+import UpdateRoom from "@/pages/Dashboard/UpdateRoom";
 
 const router = createBrowserRouter([
   {
@@ -68,16 +69,20 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "", // Empty string path for the default route
-        element: <Navigate to="/dashboard/rooms" replace />, // Redirect to /dashboard/rooms
+        path: "", 
+        element: <Navigate to="/dashboard/rooms" replace />, 
       },
       {
         path: "/dashboard/rooms",
-        element: <Rooms />, // Show Rooms component when navigating to /dashboard/rooms
+        element: <Rooms />, 
       },
       {
         path: "/dashboard/rooms/create",
-        element: <CreateRoom />, // Show CreateRoom component when navigating to /dashboard/rooms/create
+        element: <CreateRoom />, 
+      },
+      {
+        path: "/dashboard/rooms/update/:id",
+        element: <UpdateRoom />,
       },
     ],
   },

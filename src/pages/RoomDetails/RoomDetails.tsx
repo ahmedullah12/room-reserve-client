@@ -1,6 +1,6 @@
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useParams, Link } from "react-router-dom";
-import RoomDetailsImageCarousel from "@/components/RoomDetailsImageCarouse";
+import RoomDetailsImageCarousel from "@/components/Rooms/RoomDetailsImageCarouse";
 
 const RoomDetails = () => {
   const { id } = useParams();

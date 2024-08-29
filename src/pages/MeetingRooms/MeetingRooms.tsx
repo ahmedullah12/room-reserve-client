@@ -1,5 +1,5 @@
-import RoomCard from "@/components/RoomCard";
-import RoomFilters from "@/components/RoomFilters";
+import RoomCard from "@/components/Rooms/RoomCard";
+import RoomFilters from "@/components/Rooms/RoomFilters";
 import { Button } from "@/components/ui/button";
 
 import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
@@ -38,11 +38,7 @@ const MeetingRooms = () => {
     }));
   }, [priceRange, sort, capacity]);
 
-  const {
-    data: rooms,
-    isFetching,
-    isError,
-  } = useGetAllRoomsQuery(query);
+  const { data: rooms, isFetching, isError } = useGetAllRoomsQuery(query);
 
   const handleToggleFilters = () => {
     setShowFilters(!showFilters);
@@ -108,7 +104,5 @@ const MeetingRooms = () => {
     </div>
   );
 };
-
-
 
 export default MeetingRooms;

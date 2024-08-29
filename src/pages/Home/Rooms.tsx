@@ -1,4 +1,4 @@
-import RoomCard from "@/components/RoomCard";
+import RoomCard from "@/components/Rooms/RoomCard";
 import { Button } from "@/components/ui/button";
 import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
 import { TRoom } from "@/types/global";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Rooms = () => {
   const { data: rooms, isFetching } = useGetAllRoomsQuery({});
-  const limitedRooms = rooms?.data.slice(0, 4)
+  const limitedRooms = rooms?.data.slice(0, 4);
 
   if (isFetching) return <p>Loading...</p>;
   return (

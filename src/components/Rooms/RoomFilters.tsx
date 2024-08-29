@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 type FilterParams = {
     priceRange: string;
