@@ -3,27 +3,28 @@ import { baseApi } from "@/redux/api/baseApi";
 const slotsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAvailableSlots: builder.query({
-      query: ({ date, roomId }) => {
+      query: ({ date, roomId, page, limit }) => {
         // Initialize query string
-        let queryParams = "";
-
+        let queryParams = `page=${page}&limit=${limit}`;
+    
         // Append date to queryParams if it exists
         if (date) {
-          queryParams += `date=${date}`;
+          queryParams += `&date=${date}`;
         }
-
-        // Append roomId to queryParams if it exists, adding & if date was added
+    
+        // Append roomId to queryParams if it exists
         if (roomId) {
-          queryParams += `${queryParams ? "&" : ""}roomId=${roomId}`;
+          queryParams += `&roomId=${roomId}`;
         }
-
+    
         return {
-          url: `/slots/availability${queryParams ? `?${queryParams}` : ""}`,
+          url: `/slots/availability?${queryParams}`,
           method: "GET",
         };
       },
       providesTags: ["Slots"],
     }),
+    
     createSlot: builder.mutation({
       query: (payload) => ({
         url: `/slots`,
