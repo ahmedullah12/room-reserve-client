@@ -5,16 +5,30 @@ import {
   useGetAllRoomsQuery,
 } from "@/redux/features/rooms/roomsApi";
 import { TRoom } from "@/types/global";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Rooms = () => {
+  const [openDeleteModals, setOpenDeleteModals] = useState<{ [key: string]: boolean }>({});
+
   const { data: rooms, isLoading } = useGetAllRoomsQuery({});
   const [deleteRoom] = useDeleteRoomMutation();
 
   const handleDeleteRoom = async (id: string) => {
-    await deleteRoom(id);
-    toast.success("Room is deleted successfully!!!");
+    const res = await deleteRoom(id).unwrap();
+    if(res.success){
+      toast.success("Room is deleted successfully!!!");
+      setOpenDeleteModals(prev => ({ ...prev, [id]: false }));
+    }
+  };
+
+  const handleOpenDeleteModal = (id: string) => {
+    setOpenDeleteModals(prev => ({ ...prev, [id]: true }));
+  };
+
+  const handleCloseDeleteModal = (id: string) => {
+    setOpenDeleteModals(prev => ({ ...prev, [id]: false }));
   };
 
   if (isLoading) return <p>Loading....</p>;
@@ -50,7 +64,7 @@ const Rooms = () => {
             </tr>
           </thead>
           <tbody>
-            {rooms?.data?.map((room: TRoom) => (
+          {rooms?.data?.map((room: TRoom) => (
               <tr key={room._id}>
                 <td className="py-3 px-4 border-b border-r">{room.name}</td>
                 <td className="py-2 px-4 border-b border-r">{room.roomNo}</td>
@@ -79,6 +93,8 @@ const Rooms = () => {
                     id={room._id}
                     method={handleDeleteRoom}
                     isDeleted={room.isDeleted}
+                    open={openDeleteModals[room._id] || false}
+                    setOpen={(open) => open ? handleOpenDeleteModal(room._id) : handleCloseDeleteModal(room._id)}
                   />
                 </td>
               </tr>

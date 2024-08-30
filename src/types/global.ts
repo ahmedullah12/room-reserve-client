@@ -34,5 +34,6 @@ export type TSlot = {
   startTime: string;
   endTime: string;
   isBooked: boolean;
+  isDeleted: boolean;
   __v: number;
 };

@@ -8,6 +8,7 @@ import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useGetAvailableSlotsQuery } from "@/redux/features/slots/slotsApi";
 import { useGetUserDataQuery } from "@/redux/features/user/userApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { TSlot } from "@/types/global";
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -39,7 +40,7 @@ const BookingForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const slotsOptions = availableSlots?.data.map((d: any) => ({
+  const slotsOptions = availableSlots?.data.map((d: TSlot) => ({
     value: d._id,
     label: `${d.startTime}-${d.endTime}`,
   }));

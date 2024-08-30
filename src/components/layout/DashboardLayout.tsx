@@ -16,9 +16,7 @@ const sidebarSections = [
   {
     title: "Slots Management",
     key: "slots",
-    items: [
-      { name: "Slots List", path: "/dashboard/slots" },
-    ],
+    items: [{ name: "Slots List", path: "/dashboard/slots" }],
   },
   {
     title: "Booking Management",
@@ -102,29 +100,21 @@ const DashboardLayout: React.FC = () => {
         </div>
       </nav>
 
-      {/* Overlay */}
-      {showSidebar && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-          onClick={() => setShowSidebar(false)}
-        ></div>
-      )}
-
       {/* Sidebar */}
       <div
         ref={sidebarRef}
-        className={`fixed inset-y-0 left-0 z-30 w-64 md:w-80 bg-secondary overflow-y-auto transition-transform duration-300 ease-in-out transform 
+        className={`fixed inset-y-0 left-0 z-30 w-64 md:w-80 bg-secondary overflow-y-auto transition-transform duration-300 ease-in-out 
         ${showSidebar ? "translate-x-0" : "-translate-x-full"} 
-        md:relative md:translate-x-0 flex flex-col`}
+        md:translate-x-0 flex flex-col justify-between min-h-screen`}
       >
-        <div className="flex-grow">
+        <div>
           <div className="p-4">
             <p className="mb-3 text-2xl text-primary italic font-bold">
               Dashboard
             </p>
             <Separator />
           </div>
-          <div className="px-4">
+          <div className="px-4 flex-grow">
             {sidebarSections.map((section) => (
               <SidebarItem
                 key={section.key}
@@ -148,7 +138,7 @@ const DashboardLayout: React.FC = () => {
       </div>
 
       {/* Main content area */}
-      <div className="flex-grow overflow-auto p-4">
+      <div className="flex-grow overflow-auto p-4 ml-64 md:ml-80">
         <Outlet />
       </div>
     </div>
