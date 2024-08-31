@@ -27,12 +27,14 @@ const CreateSlot = () => {
         startTime,
         endTime,
       };
-      await createSlot(slotData);
-      toast.success("Slot created successfully");
-      setIsOpen(false); // Close the modal
-    } catch (error) {
+      const res = await createSlot(slotData).unwrap();
+      if(res.success === true){
+        toast.success("Slot created successfully");
+        setIsOpen(false);
+      }
+    } catch (error: any) {
       console.error("Failed to create slot", error);
-      toast.error("Failed to create slot");
+      toast.error(error.data.message);
     }
   };
 

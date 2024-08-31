@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <BookingForm />,
       },
       {
-        path: "/checkout",
+        path: "/checkout/:bookingId",
         element: <CheckoutPage />,
       },
       {

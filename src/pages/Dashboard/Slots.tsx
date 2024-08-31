@@ -40,8 +40,6 @@ const Slots = () => {
   const meta = slotsData?.meta;
   
   const totalPages = Math.ceil(meta.total / slotsPerPage);
-  console.log(totalPages);
- // Ensure a valid number for totalPages
 
   return (
     <div className="p-4">
@@ -65,12 +63,12 @@ const Slots = () => {
           <tbody>
             {slotsData?.data.map((slot: TSlot) => (
               <tr key={slot._id}>
-                <td className="py-3 px-4 border-b border-r">{slot.room.name}</td>
-                <td className="py-2 px-4 border-b border-r">{slot.room.roomNo}</td>
-                <td className="py-2 px-4 border-b border-r">{slot.date}</td>
-                <td className="py-2 px-4 border-b border-r">{slot.startTime}</td>
-                <td className="py-2 px-4 border-b border-r">{slot.endTime}</td>
-                <td className="py-2 px-4 border-b border-r">
+                <td className="py-4 px-4 border-b">{slot.room.name}</td>
+                <td className="px-4 border-b">{slot.room.roomNo}</td>
+                <td className="px-4 border-b">{slot.date}</td>
+                <td className="px-4 border-b">{slot.startTime}</td>
+                <td className="px-4 border-b">{slot.endTime}</td>
+                <td className="px-4 border-b">
                   <UpdateSlot initialData={slot} />
                   <DeleteModal
                     title={`this ${slot.room.name} slot?`}

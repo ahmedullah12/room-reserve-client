@@ -66,11 +66,11 @@ const Rooms = () => {
           <tbody>
           {rooms?.data?.map((room: TRoom) => (
               <tr key={room._id}>
-                <td className="py-3 px-4 border-b border-r">{room.name}</td>
-                <td className="py-2 px-4 border-b border-r">{room.roomNo}</td>
-                <td className="py-2 px-4 border-b border-r">{room.floorNo}</td>
-                <td className="py-2 px-4 border-b border-r">{room.capacity}</td>
-                <td className="py-2 px-4 border-b border-r">
+                <td className="py-4 px-4 border-b">{room.name}</td>
+                <td className="px-4 border-b">{room.roomNo}</td>
+                <td className="px-4 border-b">{room.floorNo}</td>
+                <td className="px-4 border-b">{room.capacity}</td>
+                <td className="px-4 border-b">
                   {room.pricePerSlot}
                 </td>
                 <td className="py-2 px-4 border-b border-r">

@@ -7,12 +7,12 @@ const slotsApi = baseApi.injectEndpoints({
         // Initialize query string
         let queryParams = `page=${page}&limit=${limit}`;
     
-        // Append date to queryParams if it exists
+        
         if (date) {
           queryParams += `&date=${date}`;
         }
     
-        // Append roomId to queryParams if it exists
+        
         if (roomId) {
           queryParams += `&roomId=${roomId}`;
         }

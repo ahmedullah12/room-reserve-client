@@ -42,12 +42,14 @@ const UpdateSlot = ({ initialData }: UpdateSlotProps) => {
         id: initialData._id,
         payload: slotData,
       }).unwrap();
-      console.log(res);
-      toast.success("Slot updated successfully");
-      setIsOpen(false); // Close the modal
-    } catch (error) {
+      if(res.success === true){
+        toast.success("Slot updated successfully");
+        setIsOpen(false);
+      }
+    } catch (error: any) {
       console.error("Failed to update slot", error);
-      toast.error("Failed to update slot");
+      toast.error(error.data.message
+      );
     }
   };
 

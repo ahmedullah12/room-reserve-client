@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type TBookingInfo = {
-  _id: string;
+  userId: string;
   name: string;
   email: string;
   phone: string;
-  role: string;
   address: string;
-  __v: number;
   roomId: string;
   roomName: string;
   date: string;
   time: string[];
-  cost: number;
+  totalAmount: number;
   slots: string[];
 };
 

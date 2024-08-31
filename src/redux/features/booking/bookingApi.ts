@@ -2,6 +2,12 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getSingleBooking: builder.query({
+      query: (id) => ({
+        url: `/bookings/${id}`,
+        method: "GET"
+      })
+    }),
     createBooking: builder.mutation({
       query: (payload) => {
         return {
@@ -11,7 +17,13 @@ const bookingApi = baseApi.injectEndpoints({
         };
       },
     }),
+    confirmBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}/payment`,
+        method: "PUT",
+      })
+    })
   }),
 });
 
-export const { useCreateBookingMutation } = bookingApi;
+export const { useGetSingleBookingQuery, useCreateBookingMutation, useConfirmBookingMutation } = bookingApi;

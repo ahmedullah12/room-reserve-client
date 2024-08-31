@@ -3,11 +3,11 @@ import MyInput from "@/components/form/MyInput";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { useCurrentUser } from "@/redux/features/auth/authApi";
-import { setBookingInfo } from "@/redux/features/booking/bookingSlice";
+import { useCreateBookingMutation } from "@/redux/features/booking/bookingApi";
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useGetAvailableSlotsQuery } from "@/redux/features/slots/slotsApi";
 import { useGetUserDataQuery } from "@/redux/features/user/userApi";
-import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useAppSelector } from "@/redux/hook";
 import { TSlot } from "@/types/global";
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
@@ -23,21 +23,21 @@ type TSelectedOption = {
 const BookingForm = () => {
   const { id } = useParams();
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [selectedSlots, setSelectedSlots] = useState<MultiValue<TSelectedOption> | []>(
-    []
-  );
+  const [selectedSlots, setSelectedSlots] = useState<
+    MultiValue<TSelectedOption> | []
+  >([]);
 
   const user = useAppSelector(useCurrentUser);
-  const {data: roomData, isFetching: roomDataFetching} = useGetSingleRoomQuery(id)
-  const {data: userData, isFetching} = useGetUserDataQuery(user?.email);
+  const { data: roomData, isFetching: roomDataFetching } =
+    useGetSingleRoomQuery(id);
+  const { data: userData, isFetching } = useGetUserDataQuery(user?.email);
   // Format date to "YYYY-MM-DD"
   const formattedDate = date?.toLocaleDateString("en-CA");
   const { data: availableSlots } = useGetAvailableSlotsQuery({
     date: formattedDate,
     roomId: id,
   });
-
-  const dispatch = useAppDispatch();
+  const [createBooking] = useCreateBookingMutation();
   const navigate = useNavigate();
 
   const slotsOptions = availableSlots?.data.map((d: TSlot) => ({
@@ -45,29 +45,42 @@ const BookingForm = () => {
     label: `${d.startTime}-${d.endTime}`,
   }));
 
-  const handleSlotsValueChange = (selectedOptions: MultiValue<TSelectedOption>) => {
+  const handleSlotsValueChange = (
+    selectedOptions: MultiValue<TSelectedOption>
+  ) => {
     setSelectedSlots(selectedOptions);
   };
 
-  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
-    if(selectedSlots.length === 0) return toast.error("Please select a slot.");
+  const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if (selectedSlots.length === 0) return toast.error("Please select a slot.");
 
     const bookingInfoData = {
-      ...data,
-      roomId: id,
+      userId: data._id,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      room: id,
       roomName: roomData?.data.name,
       date: formattedDate,
-      time: slotsOptions?.map((option: TSelectedOption) => option.label),
-      cost: roomData?.data.pricePerSlot * slotsOptions.length,
-      slots: selectedSlots?.map((option: TSelectedOption) => option.value)
+      time: selectedSlots?.map((option: TSelectedOption) => option.label),
+      totalAmount: roomData?.data.pricePerSlot * selectedSlots.length,
+      slots: selectedSlots?.map((option: TSelectedOption) => option.value),
     };
-    
-    dispatch(setBookingInfo(bookingInfoData))
-    navigate("/checkout");
-  }
 
+    try {
+      const res = await createBooking(bookingInfoData).unwrap();
+      if (res.success === true) {
+        toast.success("Booking created");
+        navigate(`/checkout/${res.data._id}`);
+      }
+    } catch (err: any) {
+      toast.error(err.data.message);
+      console.log(err);
+    }
+  };
 
-  if(isFetching && roomDataFetching) return <p>Loading..</p>
+  if (isFetching && roomDataFetching) return <p>Loading..</p>;
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -114,25 +127,43 @@ const BookingForm = () => {
       </div>
 
       {/* Form below calendar and slots */}
-      {
-        !isFetching && (
-          <div className="mt-8">
-        <MyForm defaultValues={userData?.data} onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <MyInput width="max-w-[300px]" name="name" label="Name" type="text" />
-            <MyInput width="max-w-[300px]" name="email" label="Email" type="email" />
-            <MyInput width="max-w-[300px]" name="phone" label="Phone" type="text" />
-            <MyInput width="max-w-[300px]" name="address" label="Address" type="text" />
-          </div>
-          <div className="mt-4 text-center">
-            <Button type="submit" className="bg-primary w-full md:w-auto">
-              Proceed to Checkout
-            </Button>
-          </div>
-        </MyForm>
-      </div>
-        )
-      }
+      {!isFetching && (
+        <div className="mt-8">
+          <MyForm defaultValues={userData?.data} onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <MyInput
+                width="max-w-[300px]"
+                name="name"
+                label="Name"
+                type="text"
+              />
+              <MyInput
+                width="max-w-[300px]"
+                name="email"
+                label="Email"
+                type="email"
+              />
+              <MyInput
+                width="max-w-[300px]"
+                name="phone"
+                label="Phone"
+                type="text"
+              />
+              <MyInput
+                width="max-w-[300px]"
+                name="address"
+                label="Address"
+                type="text"
+              />
+            </div>
+            <div className="mt-4 text-center">
+              <Button type="submit" className="bg-primary w-full md:w-auto">
+                Proceed to Checkout
+              </Button>
+            </div>
+          </MyForm>
+        </div>
+      )}
     </div>
   );
 };
