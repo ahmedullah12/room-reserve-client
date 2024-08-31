@@ -7,9 +7,10 @@ body{
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
     background: #f7e6e5;
     -webkit-border-radius: 1ex;
+
   }
   
   ::-webkit-scrollbar-thumb {

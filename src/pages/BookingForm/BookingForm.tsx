@@ -51,6 +51,9 @@ const BookingForm = () => {
     setSelectedSlots(selectedOptions);
   };
 
+  const currentDate = new Date();
+  const formattedCurrentDate = currentDate.toISOString().split('T')[0];
+
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (selectedSlots.length === 0) return toast.error("Please select a slot.");
 
@@ -62,7 +65,7 @@ const BookingForm = () => {
       address: data.address,
       room: id,
       roomName: roomData?.data.name,
-      date: formattedDate,
+      date: formattedCurrentDate,
       time: selectedSlots?.map((option: TSelectedOption) => option.label),
       totalAmount: roomData?.data.pricePerSlot * selectedSlots.length,
       slots: selectedSlots?.map((option: TSelectedOption) => option.value),

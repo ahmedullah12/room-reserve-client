@@ -107,7 +107,7 @@ const CheckoutPage = () => {
         <CardHeader>
           <CardTitle className="text-primary text-2xl font-bold">Payment Options</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="ps-4">
           <div className="flex flex-col gap-4">
             <label className="flex items-center ">
               <input
