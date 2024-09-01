@@ -52,5 +52,6 @@ export type TBooking = {
   room: string;
   totalAmount: number;
   isConfirmed: string;
+  isRejected: boolean;
   isDeleted: boolean;
 };

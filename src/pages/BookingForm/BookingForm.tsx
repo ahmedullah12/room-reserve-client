@@ -40,9 +40,11 @@ const BookingForm = () => {
   const [createBooking] = useCreateBookingMutation();
   const navigate = useNavigate();
 
-  const slotsOptions = availableSlots?.data.map((d: TSlot) => ({
-    value: d._id,
-    label: `${d.startTime}-${d.endTime}`,
+  const slotsOptions = availableSlots?.data
+  .filter((slot: TSlot) => !slot.isBooked) // Filter out booked slots
+  .map((slot: TSlot) => ({
+    value: slot._id,
+    label: `${slot.startTime}-${slot.endTime}`,
   }));
 
   const handleSlotsValueChange = (

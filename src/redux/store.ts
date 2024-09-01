@@ -11,7 +11,6 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import bookingSlice from "./features/booking/bookingSlice";
 import { baseApi } from "./api/baseApi";
 
 const persistConfig = {
@@ -25,7 +24,6 @@ export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistAuthReducer,
-    booking: bookingSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

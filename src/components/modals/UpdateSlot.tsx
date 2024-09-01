@@ -15,9 +15,10 @@ type UpdateSlotProps = {
     endTime: string;
     isDeleted: boolean;
   };
+  isBooked: boolean;
 };
 
-const UpdateSlot = ({ initialData }: UpdateSlotProps) => {
+const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
   const [room, setRoom] = useState(initialData.room._id);
   const [date, setDate] = useState(new Date(initialData.date));
   const [startTime, setStartTime] = useState(initialData.startTime);
@@ -42,14 +43,13 @@ const UpdateSlot = ({ initialData }: UpdateSlotProps) => {
         id: initialData._id,
         payload: slotData,
       }).unwrap();
-      if(res.success === true){
+      if (res.success === true) {
         toast.success("Slot updated successfully");
         setIsOpen(false);
       }
     } catch (error: any) {
       console.error("Failed to update slot", error);
-      toast.error(error.data.message
-      );
+      toast.error(error.data.message);
     }
   };
 
@@ -57,12 +57,8 @@ const UpdateSlot = ({ initialData }: UpdateSlotProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <button
-          className={`mr-2 mb-1 md:mb-0 px-2 py-1 ${
-            initialData.isDeleted
-              ? "bg-gray-300"
-              : "bg-primary hover:bg-secondary"
-          } text-sm text-white rounded `}
-          disabled={initialData.isDeleted}
+          className={`mr-2 mb-1 md:mb-0 px-2 py-1 bg-primary hover:bg-secondary text-sm text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed`}
+          disabled={initialData.isDeleted || isBooked}
         >
           Update
         </button>

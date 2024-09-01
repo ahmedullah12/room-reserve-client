@@ -2,6 +2,13 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllBookings: builder.query({
+      query: () => ({
+        url: `/bookings`,
+        method: "GET",
+      }),
+      providesTags: ["Bookings"],
+    }),
     getSingleBooking: builder.query({
       query: (id) => ({
         url: `/bookings/${id}`,
@@ -33,6 +40,13 @@ const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Bookings"],
     }),
+    deleteBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Bookings"],
+    }),
     cancelBooking: builder.mutation({
       query: (bookingId) => ({
         url: `/bookings/${bookingId}/cancel`,
@@ -40,13 +54,31 @@ const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Bookings"],
     }),
+    approveBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}/approve`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Bookings"],
+    }),
+    rejectBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}/reject`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Bookings"],
+    }),
   }),
 });
 
 export const {
+  useGetAllBookingsQuery,
   useGetSingleBookingQuery,
   useCreateBookingMutation,
   useConfirmBookingMutation,
   useGetMyBookingQuery,
-  useCancelBookingMutation
+  useDeleteBookingMutation,
+  useCancelBookingMutation,
+  useApproveBookingMutation,
+  useRejectBookingMutation,
 } = bookingApi;

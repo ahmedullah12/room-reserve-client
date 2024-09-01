@@ -19,7 +19,7 @@ const MyBookings = () => {
 
   // Filter out bookings with isConfirmed === "cancelled" or isDeleted === true
   const filteredBookings = myBookings?.data?.filter(
-    (booking: TBooking) => booking.isConfirmed !== "cancelled" && !booking.isDeleted
+    (booking: TBooking) => booking.isConfirmed !== "cancelled" && !booking.isDeleted && !booking.isRejected 
   );
 
   return (

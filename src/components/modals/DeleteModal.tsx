@@ -14,20 +14,22 @@ type TDeletePayload = {
   id: string;
   method: (id: string) => void;
   isDeleted: boolean;
+  isRejected?: boolean;
+  isConfirmed?: boolean;
+  isBooked?: boolean;
   open: boolean;
   setOpen: (open: boolean) => void;
 };
 
-const DeleteModal = ({ title, id, method, isDeleted, open, setOpen }: TDeletePayload) => {
-  
+const DeleteModal = ({ title, id, method, isDeleted, isRejected=true, isConfirmed=false,isBooked=false, open, setOpen }: TDeletePayload) => {
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <button
-          disabled={isDeleted}
-          className={`px-2 py-1 ${
-            isDeleted ? "bg-gray-300" : "bg-red-500 hover:bg-red-600"
-          } text-sm text-white rounded `}
+          disabled={isDeleted || !isRejected || isConfirmed || isBooked}
+          className={`px-2 py-1 bg-red-500 hover:bg-red-600"
+          } text-sm text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed`}
         >
           {isDeleted ? "Deleted" : "Delete"}
         </button>
