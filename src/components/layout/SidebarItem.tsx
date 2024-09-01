@@ -34,7 +34,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         {isOpen ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
       </button>
       {isOpen && (
-        <div className="ml-4">
+        <div className="ml-4 pb-2 pe-2">
           {items.map((item, index) => (
             <Link
               key={index}

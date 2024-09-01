@@ -16,6 +16,8 @@ import Rooms from "@/pages/Dashboard/Rooms"; // Import the Rooms component
 import CreateRoom from "@/pages/Dashboard/CreateRoom";
 import UpdateRoom from "@/pages/Dashboard/UpdateRoom";
 import Slots from "@/pages/Dashboard/Slots";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
+import BookingList from "@/pages/Dashboard/BookingList";
 
 const router = createBrowserRouter([
   {
@@ -33,19 +35,36 @@ const router = createBrowserRouter([
       },
       {
         path: "/meeting-rooms/:id",
-        element: <RoomDetails />,
+        element: (
+          <ProtectedRoute role={undefined}>
+            <RoomDetails />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/booking/:id",
-        element: <BookingForm />,
+        element: (
+          <ProtectedRoute role={undefined}>
+            {" "}
+            <BookingForm />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/checkout/:bookingId",
-        element: <CheckoutPage />,
+        element: (
+          <ProtectedRoute role={undefined}>
+            <CheckoutPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/my-bookings",
-        element: <MyBookings />,
+        element: (
+          <ProtectedRoute role="user">
+            <MyBookings />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/about",
@@ -70,24 +89,48 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "", 
-        element: <Navigate to="/dashboard/rooms" replace />, 
+        path: "",
+        element: <Navigate to="/dashboard/rooms" replace />,
       },
       {
         path: "/dashboard/rooms",
-        element: <Rooms />, 
+        element: (
+          <ProtectedRoute role="admin">
+            <Rooms />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/rooms/create",
-        element: <CreateRoom />, 
+        element: (
+          <ProtectedRoute role="admin">
+            <CreateRoom />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/rooms/update/:id",
-        element: <UpdateRoom />,
+        element: (
+          <ProtectedRoute role="admin">
+            <UpdateRoom />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/slots",
-        element: <Slots />, 
+        element: (
+          <ProtectedRoute role="admin">
+            <Slots />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/bookings",
+        element: (
+          <ProtectedRoute role="admin">
+            <BookingList />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
