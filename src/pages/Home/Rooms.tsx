@@ -1,17 +1,25 @@
+import Loader from "@/components/Loader";
 import RoomCard from "@/components/Rooms/RoomCard";
 import { Button } from "@/components/ui/button";
 import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
 import { TRoom } from "@/types/global";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Rooms = () => {
-  const { data: rooms, isFetching } = useGetAllRoomsQuery({});
+  const { data: rooms, isLoading } = useGetAllRoomsQuery({});
   const limitedRooms = rooms?.data.slice(0, 4);
 
-  if (isFetching) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   return (
-    <div className=" py-20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ bounce: 0.5, duration: 1 }}
+      viewport={{ once: true }}
+      className=" py-20"
+    >
       <div className="lg:container mx-auto px-6 md:px-12">
         <h1 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-8">
           Featured Rooms
@@ -31,7 +39,7 @@ const Rooms = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

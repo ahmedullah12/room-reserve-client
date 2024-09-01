@@ -1,4 +1,5 @@
 import { FaCheckCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -23,13 +24,20 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <div className="py-20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ bounce: 0.5, duration: 1 }}
+      viewport={{ once: true }}
+      className="py-20"
+    >
       <div className="lg:container mx-auto px-6 md:px-12">
         <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-4">
           Why Choose Us?
         </h2>
         <p className="text-xl text-center text-gray-600 mb-8">
-          Discover the advantages that make us the best choice for your room bookings.
+          Discover the advantages that make us the best choice for your room
+          bookings.
         </p>
         <div className="flex flex-col md:flex-row justify-between gap-8">
           {features.map((feature, index) => (
@@ -52,7 +60,7 @@ const WhyChooseUs = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

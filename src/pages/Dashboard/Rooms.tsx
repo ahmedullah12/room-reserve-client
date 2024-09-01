@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import DeleteModal from "@/components/modals/DeleteModal";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,7 +32,7 @@ const Rooms = () => {
     setOpenDeleteModals(prev => ({ ...prev, [id]: false }));
   };
 
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loader/>;
   return (
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-4">Room List</h1>

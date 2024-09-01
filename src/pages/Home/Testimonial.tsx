@@ -6,12 +6,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay"
+import Autoplay from "embla-carousel-autoplay";
 import { reviewsData } from "@/utils/datas";
+import { motion } from "framer-motion";
 
 const Testimonial = () => {
   return (
-    <div className="py-20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ bounce: 0.5, duration: 1 }}
+      viewport={{ once: true }}
+      className="py-20"
+    >
       <h1 className="mb-8 text-[32px] md:text-[40px] font-bold text-center text-primary">
         Customer Testimonials
       </h1>
@@ -61,11 +68,11 @@ const Testimonial = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="border-2 border-primary text-primary "/>
-          <CarouselNext className="border-2 border-primary text-primary"/>
+          <CarouselPrevious className="border-2 border-primary text-primary " />
+          <CarouselNext className="border-2 border-primary text-primary" />
         </Carousel>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

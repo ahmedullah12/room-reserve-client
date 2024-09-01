@@ -99,7 +99,6 @@ const RoomForm: React.FC<RoomFormProps> = ({ initialValues, isUpdate = false }) 
         images: [...imageUrls, ...uploadedImageUrls],
       };
 
-      console.log(roomData);
 
       if (isUpdate) {
         // Update room logic

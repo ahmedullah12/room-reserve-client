@@ -1,5 +1,6 @@
 import MyForm from "@/components/form/MyForm";
 import MyInput from "@/components/form/MyInput";
+import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { useCurrentUser } from "@/redux/features/auth/authApi";
@@ -28,9 +29,9 @@ const BookingForm = () => {
   >([]);
 
   const user = useAppSelector(useCurrentUser);
-  const { data: roomData, isFetching: roomDataFetching } =
+  const { data: roomData, isLoading: roomDataLoading } =
     useGetSingleRoomQuery(id);
-  const { data: userData, isFetching } = useGetUserDataQuery(user?.email);
+  const { data: userData, isLoading } = useGetUserDataQuery(user?.email);
   // Format date to "YYYY-MM-DD"
   const formattedDate = date?.toLocaleDateString("en-CA");
   const { data: availableSlots } = useGetAvailableSlotsQuery({
@@ -85,7 +86,7 @@ const BookingForm = () => {
     }
   };
 
-  if (isFetching && roomDataFetching) return <p>Loading..</p>;
+  if (isLoading && roomDataLoading) return <Loader/>;
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -132,7 +133,7 @@ const BookingForm = () => {
       </div>
 
       {/* Form below calendar and slots */}
-      {!isFetching && (
+      {!isLoading && (
         <div className="mt-8">
           <MyForm defaultValues={userData?.data} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

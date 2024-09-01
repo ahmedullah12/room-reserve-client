@@ -3,9 +3,11 @@ import MyInput from "@/components/form/MyInput";
 import MyTextarea from "@/components/form/MyTextarea";
 import { motion } from "framer-motion";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Contact = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    toast.success("Message sent successfully!!!");
     console.log(data);
   };
 

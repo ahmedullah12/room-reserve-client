@@ -4,6 +4,7 @@ import {
   FaCalendarAlt,
   FaHeadset,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -30,7 +31,13 @@ const services = [
 
 const Advertisement = () => {
   return (
-    <section className=" py-20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ bounce: 0.5, duration: 1 }}
+      viewport={{ once: true }}
+      className=" py-20"
+    >
       <div className="lg:container mx-auto px-6 md:px-12">
         <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-2">
           Our Services
@@ -50,15 +57,13 @@ const Advertisement = () => {
               <h3 className=" font-semibold mb-3 text-primary">
                 {service.title}
               </h3>
-              
-              <p className="text-sm text-gray-600 flex-grow ">
-                {service.desc}
-              </p>
+
+              <p className="text-sm text-gray-600 flex-grow ">{service.desc}</p>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.div>
   );
 };
 

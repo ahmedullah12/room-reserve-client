@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import RoomCard from "@/components/Rooms/RoomCard";
 import RoomFilters from "@/components/Rooms/RoomFilters";
 import { Button } from "@/components/ui/button";
@@ -38,7 +39,7 @@ const MeetingRooms = () => {
     }));
   }, [priceRange, sort, capacity]);
 
-  const { data: rooms, isFetching, isError } = useGetAllRoomsQuery(query);
+  const { data: rooms, isLoading, isError } = useGetAllRoomsQuery(query);
 
   const handleToggleFilters = () => {
     setShowFilters(!showFilters);
@@ -91,8 +92,8 @@ const MeetingRooms = () => {
         </div>
         {isError ? (
           <p>No data found....</p>
-        ) : isFetching ? (
-          <p>Loading...</p>
+        ) : isLoading ? (
+          <Loader/>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {rooms.data

@@ -1,13 +1,14 @@
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useParams, Link } from "react-router-dom";
 import RoomDetailsImageCarousel from "@/components/Rooms/RoomDetailsImageCarouse";
+import Loader from "@/components/Loader";
 
 const RoomDetails = () => {
   const { id } = useParams();
 
   const { data: roomData, isLoading } = useGetSingleRoomQuery(id);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader/>;
   return (
     <div className="pt-10 md:pt-20 pb-4 lg:container mx-auto px-6 md:px-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

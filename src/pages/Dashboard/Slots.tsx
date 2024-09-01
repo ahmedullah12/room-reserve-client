@@ -9,6 +9,7 @@ import {
 } from "@/redux/features/slots/slotsApi";
 import { TSlot } from "@/types/global";
 import Pagination from "@/components/Pagination";
+import Loader from "@/components/Loader";
 
 const Slots = () => {
   const [openDeleteModals, setOpenDeleteModals] = useState<{
@@ -40,7 +41,7 @@ const Slots = () => {
     setOpenDeleteModals((prev) => ({ ...prev, [id]: false }));
   };
 
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loader/>;
 
   const meta = slotsData?.meta;
 

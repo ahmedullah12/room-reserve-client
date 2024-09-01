@@ -6,6 +6,7 @@ import PaymentConfirmationModal from "@/components/modals/PaymentConfirmationMod
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Calendar, Clock, DollarSign, User, Mail, Phone, Home } from "lucide-react";
+import Loader from "@/components/Loader";
 
 const CheckoutPage = () => {
   const { bookingId } = useParams();
@@ -30,7 +31,6 @@ const CheckoutPage = () => {
     }
 
     const res = await confirmBooking(bookingInfo?._id).unwrap();
-    console.log(res);
     if (res.data.result === "true") {
       window.location.href = res.data.payment_url;
     }
@@ -41,7 +41,7 @@ const CheckoutPage = () => {
     navigate(`/my-bookings`); 
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader/>;
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-6">

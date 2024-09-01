@@ -1,6 +1,24 @@
 import { motion } from "framer-motion";
 
 const About = () => {
+  const teamMembers = [
+    {
+      name: "Alice",
+      role: "CEO",
+      image: "https://i.ibb.co/4SQZynR/1.jpg",
+    },
+    {
+      name: "Bob",
+      role: "CTO",
+      image: "https://i.ibb.co/Swt8pLG/2.jpg",
+    },
+    {
+      name: "Charlie",
+      role: "COO",
+      image: "https://i.ibb.co/6H4wQkt/4.jpg",
+    },
+  ];
+
   return (
     <div className="">
       <div className="py-16">
@@ -69,7 +87,7 @@ const About = () => {
             Meet the Team
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {["Alice", "Bob", "Charlie"].map((name, index) => (
+            {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
                 className="text-center p-6 rounded-lg shadow-lg bg-white dark:bg-slate-900 hover:scale-105 transition-transform"
@@ -78,9 +96,17 @@ const About = () => {
                 transition={{ bounce: 0.5, duration: 1 }}
                 viewport={{ once: true }}
               >
-                <div className="h-32 w-32 mx-auto rounded-full bg-slate-300 dark:bg-slate-700 mb-4"></div>
-                <h3 className="text-xl font-semibold">{name}</h3>
-                <p className="text-slate-600 dark:text-slate-400">Role</p>
+                <div className="h-32 w-32 mx-auto rounded-full overflow-hidden mb-4">
+                  <img
+                    src={member.image}
+                    alt={`${member.name}'s profile`}
+                    className="object-cover h-full w-full"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold">{member.name}</h3>
+                <p className="text-slate-600 dark:text-slate-400">
+                  {member.role}
+                </p>
                 <p className="text-slate-500 dark:text-slate-300 mt-2">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                   non risus.

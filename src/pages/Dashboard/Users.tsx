@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import { useGetAllUserQuery, useMakeAdminMutation } from "@/redux/features/user/userApi";
 import { TUser } from "@/types/global";
 import toast from "react-hot-toast";
@@ -13,7 +14,7 @@ const Users = () => {
         toast.success(res.message);
     }
   }
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loader/>;
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-4">All Users</h1>

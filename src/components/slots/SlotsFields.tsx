@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
+import Loader from "../Loader";
 
 type TOption = {
   value: string;
@@ -67,7 +68,7 @@ const SlotFields = ({
     return `${hour}:00`;
   });
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading) return <Loader/>;
 
   return (
     <div className="space-y-6 overflow-y-auto">

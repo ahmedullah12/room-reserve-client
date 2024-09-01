@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import DeleteModal from "@/components/modals/DeleteModal";
 import {
   useApproveBookingMutation,
@@ -48,7 +49,7 @@ const BookingList = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader/>;
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-4">Booking List</h1>

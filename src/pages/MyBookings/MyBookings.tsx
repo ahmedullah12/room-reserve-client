@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import { useCancelBookingMutation, useGetMyBookingQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/global";
 import toast from "react-hot-toast";
@@ -15,7 +16,7 @@ const MyBookings = () => {
     }
   };
 
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Loader/>;
 
   // Filter out bookings with isConfirmed === "cancelled" or isDeleted === true
   const filteredBookings = myBookings?.data?.filter(

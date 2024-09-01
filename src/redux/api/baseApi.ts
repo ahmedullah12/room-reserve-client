@@ -18,7 +18,7 @@ type TCustomError = {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://assignment-3-six-liart.vercel.app/api",
   credentials: "include",
   //this is for sending token when making a request to backend
   prepareHeaders: (headers, { getState }) => {
@@ -45,7 +45,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
 
   if (error?.status === 401) {
-    console.log("401");
     const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
       method: "POST",
       credentials: "include",

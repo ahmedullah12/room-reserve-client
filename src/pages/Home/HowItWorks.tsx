@@ -1,11 +1,15 @@
 import { Steps } from "@/utils/datas";
-
-
-
+import { motion } from "framer-motion";
 
 const HowItWorks = () => {
   return (
-    <section className=" py-20">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ bounce: 0.5, duration: 1 }}
+      viewport={{ once: true }}
+      className=" py-20"
+    >
       <div className="container mx-auto px-4">
         <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary ">
           How It Works
@@ -45,7 +49,7 @@ const HowItWorks = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.div>
   );
 };
 
