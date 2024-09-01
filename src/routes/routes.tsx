@@ -18,6 +18,7 @@ import UpdateRoom from "@/pages/Dashboard/UpdateRoom";
 import Slots from "@/pages/Dashboard/Slots";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import BookingList from "@/pages/Dashboard/BookingList";
+import Users from "@/pages/Dashboard/Users";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="admin">
             <BookingList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/users",
+        element: (
+          <ProtectedRoute role="admin">
+            <Users />
           </ProtectedRoute>
         ),
       },

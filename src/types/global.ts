@@ -55,3 +55,14 @@ export type TBooking = {
   isRejected: boolean;
   isDeleted: boolean;
 };
+
+
+export type TUser = {
+  _id: string
+  name: string
+  email: string
+  phone: string
+  role: string
+  address: string
+  __v: number
+}

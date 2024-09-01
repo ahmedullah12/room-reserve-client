@@ -23,6 +23,11 @@ const sidebarSections = [
     key: "bookings",
     items: [{ name: "Booking List", path: "/dashboard/bookings" }],
   },
+  {
+    title: "User Management",
+    key: "users",
+    items: [{ name: "Users", path: "/dashboard/users" }],
+  },
 ];
 
 const DashboardLayout: React.FC = () => {
