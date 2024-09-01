@@ -75,7 +75,7 @@ const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
           endTime={endTime}
           onEndTimeChange={setEndTime}
         />
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button className="bg-primary w-full max-w-[300px]" onClick={handleSubmit}>Submit</Button>
       </DialogContent>
     </Dialog>
   );

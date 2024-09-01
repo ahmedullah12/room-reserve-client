@@ -30,6 +30,10 @@ const CreateSlot = () => {
       const res = await createSlot(slotData).unwrap();
       if(res.success === true){
         toast.success("Slot created successfully");
+        setRoom("");
+        setDate(undefined);
+        setStartTime("");
+        setEndTime("");
         setIsOpen(false);
       }
     } catch (error: any) {

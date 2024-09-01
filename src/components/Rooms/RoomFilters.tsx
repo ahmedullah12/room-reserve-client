@@ -59,7 +59,7 @@ const RoomFilters = ({
         </div>
         <div>
           <Label>Select Capacity</Label>
-          <Select onValueChange={handleCapacityValueChange}>
+          <Select value={capacity} onValueChange={handleCapacityValueChange}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select capacity" />
             </SelectTrigger>
