@@ -3,7 +3,6 @@ import MyForm from "@/components/form/MyForm";
 import MyInput from "@/components/form/MyInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { useCreateRoomMutation, useUpdateRoomMutation } from "@/redux/features/rooms/roomsApi";
@@ -59,36 +58,48 @@ const RoomForm: React.FC<RoomFormProps> = ({ initialValues, isUpdate = false }) 
   };
 
   const uploadImages = async () => {
-    const imageHostKey = import.meta.env.VITE_IMGBB_API_KEY;
-    const imgbbUrl = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-
     const uploadedImageUrls: string[] = [];
-
+  
     for (const image of images) {
       const formData = new FormData();
-      formData.append("image", image);
-
-      const res = await axios.post(imgbbUrl, formData);
-      if (res.data.status === 200) {
-        uploadedImageUrls.push(res.data.data.url);
-      } else {
-        throw new Error("Failed to upload image");
+      formData.append('file', image);
+      formData.append('upload_preset', 'myCloud'); // Replace with your Cloudinary upload preset
+  
+      try {
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          {
+            method: 'POST',
+            body: formData,
+          }
+        );
+  
+        const data = await response.json();
+        if (response.ok) {
+          uploadedImageUrls.push(data.secure_url);
+        } else {
+          throw new Error(data.error.message);
+        }
+      } catch (error) {
+        console.error('Cloudinary Upload Error:', error);
+        throw new Error('Failed to upload image');
       }
     }
-
+  
     return uploadedImageUrls;
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (amenities.length === 0) {
-      alert("Please add at least one amenity.");
-      return;
+      return toast.error("Please add at least one amenities");
     }
-
+  
     setLoading(true);
     try {
+      // Upload images to Cloudinary
       const uploadedImageUrls = images.length > 0 ? await uploadImages() : [];
-
+  
+      // Prepare room data
       const roomData = {
         name: data.name,
         roomNo: Number(data.roomNo),
@@ -98,8 +109,8 @@ const RoomForm: React.FC<RoomFormProps> = ({ initialValues, isUpdate = false }) 
         amenities,
         images: [...imageUrls, ...uploadedImageUrls],
       };
-
-
+  
+      // Handle create or update room
       if (isUpdate) {
         // Update room logic
         const result = await updateRoom({ id: initialValues?._id, payload: roomData });
@@ -122,6 +133,7 @@ const RoomForm: React.FC<RoomFormProps> = ({ initialValues, isUpdate = false }) 
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="p-8 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">

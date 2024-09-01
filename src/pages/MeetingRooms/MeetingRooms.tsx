@@ -38,7 +38,6 @@ const MeetingRooms = () => {
       sort: sort,
     }));
   }, [priceRange, sort, capacity]);
-
   const { data: rooms, isLoading, isError } = useGetAllRoomsQuery(query);
 
   const handleToggleFilters = () => {

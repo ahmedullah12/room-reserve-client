@@ -6,6 +6,16 @@ body{
   background-color: #FFFDF9;
 }
 
+#file-upload{
+  display: none;
+};
+
+.custom-file-upload{
+  display: inline-block;
+  cursor: pointer;
+}
+
+
 ::-webkit-scrollbar {
   height: 5px;
     width: 5px;
