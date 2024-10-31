@@ -1,19 +1,11 @@
 import * as React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselNext,
-//   CarouselPrevious,
-//   type CarouselApi,
-// } from "@/components/ui/carousel";
 
 type RoomImagesCarouselProps = {
   images: string[];
 };
 
-const RoomDetailsImageCarousel = ({ images }: RoomImagesCarouselProps) => {
+const RoomDetailsImages = ({ images }: RoomImagesCarouselProps) => {
   const [selectedImage, setSelectedImage] = React.useState(0);
 
   const handleImageClick = (index: number) => {
@@ -57,4 +49,4 @@ const RoomDetailsImageCarousel = ({ images }: RoomImagesCarouselProps) => {
   );
 };
 
-export default RoomDetailsImageCarousel;
+export default RoomDetailsImages;

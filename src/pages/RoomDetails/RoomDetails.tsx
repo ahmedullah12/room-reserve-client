@@ -1,7 +1,7 @@
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useParams, Link } from "react-router-dom";
-import RoomDetailsImageCarousel from "@/components/Rooms/RoomDetailsImageCarouse";
 import Loader from "@/components/Loader";
+import RoomDetailsImages from "@/components/Rooms/RoomDetailsImages";
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -13,7 +13,7 @@ const RoomDetails = () => {
     <div className="pt-10 md:pt-20 pb-4 lg:container mx-auto px-6 md:px-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="w-full">
-          <RoomDetailsImageCarousel images={roomData.data.images} />
+          <RoomDetailsImages images={roomData.data.images} />
         </div>
 
         <div className="">

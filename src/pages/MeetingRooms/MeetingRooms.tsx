@@ -1,5 +1,5 @@
-import Loader from "@/components/Loader";
 import RoomCard from "@/components/Rooms/RoomCard";
+import RoomCardSkeleton from "@/components/Rooms/RoomCardSkeleton";
 import RoomFilters from "@/components/Rooms/RoomFilters";
 import { Button } from "@/components/ui/button";
 
@@ -92,7 +92,11 @@ const MeetingRooms = () => {
         {isError ? (
           <p>No data found....</p>
         ) : isLoading ? (
-          <Loader />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[...Array(8)].map((_, index) => (
+              <RoomCardSkeleton key={index}/>
+            ))}
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {rooms.data
