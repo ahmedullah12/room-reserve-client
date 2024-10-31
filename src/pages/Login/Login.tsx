@@ -45,16 +45,16 @@ const Login = () => {
     }
   }, [error]);
   return (
-    <div className="h-screen flex justify-center items-center bg-accent  relative">
+    <div className="h-screen flex justify-center items-center bg-white  relative">
       <div className="absolute top-2 left-4">
         <Link to="/" className="flex items-center gap-2">
-          <MdOutlineKeyboardBackspace color="#674188" className="mt-1" size={30}/>
+          <MdOutlineKeyboardBackspace color="#674188" className="mt-[2px]" size={30}/>
           <span className="text-xl text-primary font-semibold ">Back to Home</span>
         </Link>
       </div>
       <div className="w-full md:w-[500px] px-4">
-        <div className="bg-white rounded-lg px-10 py-5">
-          <h1 className="mb-6 font-semibold text-2xl text-primary">Login</h1>
+        <div className="bg-[#F9F4F4] rounded-lg px-10 py-5 shadow-lg">
+          <h1 className="mb-6 font-semibold text-2xl">Login</h1>
 
           <MyForm onSubmit={onSubmit}>
             <MyInput

@@ -53,7 +53,7 @@ const MeetingRooms = () => {
   return (
     <div className="py-10">
       <div className="lg:container mx-auto px-6 md:px-12">
-        <h1 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-2">
+        <h1 className="text-[28px] md:text-[36px] font-bold text-center text-primary mb-2">
           Explore Our Meeting Rooms
         </h1>
         <p className=" text-center text-lg text-gray-600 mb-12">
@@ -92,11 +92,11 @@ const MeetingRooms = () => {
         {isError ? (
           <p>No data found....</p>
         ) : isLoading ? (
-          <Loader/>
+          <Loader />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {rooms.data
-              .filter((room: TRoom) => !room.isDeleted) 
+              .filter((room: TRoom) => !room.isDeleted)
               .map((room: TRoom, index: number) => (
                 <RoomCard key={index} room={room} />
               ))}

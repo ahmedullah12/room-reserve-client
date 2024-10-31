@@ -1,34 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: #FFFDF9;
+
+* {
+  font-family: 'Inter', sans-serif;
 }
 
-#file-upload{
+#file-upload {
   display: none;
-};
+}
 
-.custom-file-upload{
+.custom-file-upload {
   display: inline-block;
   cursor: pointer;
 }
 
-
 ::-webkit-scrollbar {
   height: 5px;
-    width: 5px;
-    background: #f7e6e5;
-    -webkit-border-radius: 1ex;
+  width: 5px;
+  background: #f7e6e5;
+  -webkit-border-radius: 1ex;
+}
 
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #674188;
-    -webkit-border-radius: 1ex;
-  }
-  
-  ::-webkit-scrollbar-corner {
-    background: #674188;
-  }
+::-webkit-scrollbar-thumb {
+  background: #674188;
+  -webkit-border-radius: 1ex;
+}
+
+::-webkit-scrollbar-corner {
+  background: #674188;
+}

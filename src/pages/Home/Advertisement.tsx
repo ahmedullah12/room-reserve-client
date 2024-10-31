@@ -39,17 +39,17 @@ const Advertisement = () => {
       className=" py-20"
     >
       <div className="lg:container mx-auto px-6 md:px-12">
-        <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-2">
+        <h2 className="text-[28px] md:text-[36px] text- font-medium text-center mb-2">
           Our Services
         </h2>
-        <p className="text-xl text-center text-gray-600 mb-12">
+        <p className="text-xl text-center mb-12">
           Discover how we enhance your booking experience
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 flex flex-col h-full"
+              className="bg-[#FFFDF9] p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 flex flex-col h-full"
             >
               <div className="bg-secondary bg-opacity-20 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 {service.icon}

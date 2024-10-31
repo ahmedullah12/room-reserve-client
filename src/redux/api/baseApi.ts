@@ -45,7 +45,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
 
   if (error?.status === 401) {
-    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+    const res = await fetch("https://assignment-3-six-liart.vercel.app/api/auth/refresh-token", {
       method: "POST",
       credentials: "include",
     });

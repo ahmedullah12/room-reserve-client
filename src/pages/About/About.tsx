@@ -24,7 +24,7 @@ const About = () => {
       <div className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-4 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ bounce: 0.5, duration: 1 }}
@@ -51,7 +51,7 @@ const About = () => {
       <div className="py-16 bg-accent ">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-4 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ bounce: 0.5, duration: 1 }}
@@ -78,7 +78,7 @@ const About = () => {
       <div className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-4 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ bounce: 0.5, duration: 1 }}
@@ -120,7 +120,7 @@ const About = () => {
       <div className="py-16 bg-accent">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-4 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ bounce: 0.5, duration: 1 }}

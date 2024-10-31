@@ -21,9 +21,10 @@ const Rooms = () => {
       className=" py-20"
     >
       <div className="lg:container mx-auto px-6 md:px-12">
-        <h1 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-8">
+        <h1 className="text-[28px] md:text-[36px] font-medium text-center">
           Featured Rooms
         </h1>
+        <div className="w-full md:w-80 h-[1px] bg-primary mx-auto mt-4 mb-8" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {limitedRooms
             ?.filter((room: TRoom) => !room.isDeleted)

@@ -16,7 +16,7 @@ const RoomDetails = () => {
           <RoomDetailsImageCarousel images={roomData.data.images} />
         </div>
 
-        <div className="flex flex-col justify-between">
+        <div className="">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
               {roomData.data.name}
@@ -36,14 +36,14 @@ const RoomDetails = () => {
           </div>
 
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-secondary mb-3">
+            <h3 className="text-lg font-semibold text-primary mb-3">
               Amenities
             </h3>
             <div className="flex flex-wrap gap-2">
               {roomData.data.amenities.map((amenity: string, index: number) => (
                 <p
                   key={index}
-                  className="py-2 px-3 bg-accent text-primary font-semibold rounded-md"
+                  className="py-1 px-2 bg-accent text-primary text-sm font-semibold rounded-md"
                 >
                   {amenity}
                 </p>

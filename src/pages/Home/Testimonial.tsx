@@ -19,10 +19,12 @@ const Testimonial = () => {
       viewport={{ once: true }}
       className="py-20"
     >
-      <h1 className="mb-8 text-[32px] md:text-[40px] font-bold text-center text-primary">
-        Customer Testimonials
-      </h1>
-
+      <div className="px-4">
+        <h1 className="text-[28px] md:text-[36px] font-medium text-center">
+          Customer Testimonials
+        </h1>
+        <div className="mt-4 mb-8 bg-primary h-[1px] w-full md:w-[500px] mx-auto" />
+      </div>
       <div className="md:container px-16 md:px-[50px]">
         <Carousel
           plugins={[
@@ -59,7 +61,7 @@ const Testimonial = () => {
                         </div>
                       </div>
 
-                      <p className="text-justify text-gray-700 overflow-y-auto flex-grow">
+                      <p className="text-justify overflow-y-auto flex-grow">
                         {data.texts}
                       </p>
                     </CardContent>

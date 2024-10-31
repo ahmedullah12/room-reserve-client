@@ -35,25 +35,58 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-accent overflow-y-auto relative">
+    <div className="min-h-screen flex justify-center items-center bg-white overflow-y-auto relative">
       <div className="absolute top-2 left-4">
         <Link to="/" className="flex items-center gap-2">
-          <MdOutlineKeyboardBackspace color="#674188" className="mt-1" size={30}/>
-          <span className="text-xl text-primary font-semibold ">Back to Home</span>
+          <MdOutlineKeyboardBackspace
+            color="#674188"
+            className="mt-1"
+            size={30}
+          />
+          <span className="text-xl text-primary font-semibold ">
+            Back to Home
+          </span>
         </Link>
       </div>
-      <div className="w-full md:w-[500px] px-4">
-        <div className="bg-white shadow-lg rounded-lg px-10 py-8">
-          <h1 className="mb-6 font-semibold text-2xl text-primary">
-            Create Account
-          </h1>
+      <div className="w-full md:w-[700px] px-4 mt-16 mb-8">
+        <div className="bg-[#F9F4F4] shadow-lg rounded-lg px-10 py-8">
+          <h1 className="mb-6 font-semibold text-2xl">Create Account</h1>
 
           <MyForm onSubmit={onSubmit}>
-            <MyInput width="max-w-[300px]" name="name" type="text" label="Name" />
-            <MyInput width="max-w-[300px]" name="email" type="text" label="Email" />
-            <MyInput width="max-w-[300px]" name="phone" type="text" label="Phone Number" />
-            <MyInput width="max-w-[300px]" name="address" type="text" label="Address" />
-            <MyInput width="max-w-[300px]" name="password" type="password" label="Password" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <MyInput
+                width="max-w-[300px]"
+                name="name"
+                type="text"
+                label="Name"
+              />
+              <MyInput
+                width="max-w-[300px]"
+                name="email"
+                type="text"
+                label="Email"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <MyInput
+                width="max-w-[300px]"
+                name="phone"
+                type="text"
+                label="Phone Number"
+              />
+              <MyInput
+                width="max-w-[300px]"
+                name="address"
+                type="text"
+                label="Address"
+              />
+            </div>
+            <MyInput
+              width=""
+              name="password"
+              type="password"
+              label="Password"
+            />
             <Button className="bg-primary ">Register</Button>
           </MyForm>
 

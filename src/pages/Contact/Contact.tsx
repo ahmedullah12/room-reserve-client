@@ -17,7 +17,7 @@ const Contact = () => {
       <div className="py-16 ">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-4 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-4 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -31,7 +31,9 @@ const Contact = () => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             <div className="px-6 py-3 text-center md:text-left shadow-md ">
-              <h3 className="text-xl md:text-2xl text-primary font-semibold mb-4">Get In Touch</h3>
+              <h3 className="text-xl md:text-2xl text-primary font-semibold mb-4">
+                Get In Touch
+              </h3>
               <p className="text-lg mb-2">Email: ahmed@ullah.com</p>
               <p className="text-lg mb-2">Phone: +8801912121212</p>
               <p className="text-lg">Address: Shewrapara, Mirpur 10, Dhaka</p>
@@ -42,7 +44,6 @@ const Contact = () => {
               animate={{ scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              
               <iframe
                 className="h-full w-full border-0"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.749863256777!2d90.37461237516494!3d23.79192007864207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c73458f06137%3A0x50dcc5d69e174edc!2sShewrapara%20Rd%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1724693098070!5m2!1sen!2sbd"
@@ -59,7 +60,7 @@ const Contact = () => {
       <section className="py-16 bg-accent">
         <div className="container mx-auto px-6 lg:px-8">
           <motion.h2
-            className="mb-6 text-[32px] md:text-[40px] font-bold text-center text-primary"
+            className="mb-6 text-[28px] md:text-[36px] font-bold text-center text-primary"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}

@@ -32,10 +32,10 @@ const WhyChooseUs = () => {
       className="py-20"
     >
       <div className="lg:container mx-auto px-6 md:px-12">
-        <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary mb-4">
+        <h2 className="text-[28px] md:text-[36px] font-medium text-center  mb-4">
           Why Choose Us?
         </h2>
-        <p className="text-xl text-center text-gray-600 mb-8">
+        <p className="text-xl text-center mb-8">
           Discover the advantages that make us the best choice for your room
           bookings.
         </p>
@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="w-full md:w-1/2 bg-[#FFFDF9] p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <h3 className="text-[24px] font-semibold text-primary mb-4">
                 {feature.title}

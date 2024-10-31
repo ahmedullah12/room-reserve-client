@@ -11,7 +11,7 @@ const HowItWorks = () => {
       className=" py-20"
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-[32px] md:text-[40px] font-bold text-center text-primary ">
+        <h2 className="text-[28px] md:text-[36px] font-medium text-center">
           How It Works
         </h2>
         <p className="mb-20 text-center text-xl text-gray-600">
