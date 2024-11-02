@@ -51,8 +51,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     });
     const data = await res.json();
 
-    if (data?.data?.accessToken) {
-      const user = (api.getState() as RootState).auth.user;
+    if (data?.data?.accessToken) {      const user = (api.getState() as RootState).auth.user;
       api.dispatch(setUser({ user, token: data.data.accessToken }));
 
       result = await baseQuery(args, api, extraOptions);

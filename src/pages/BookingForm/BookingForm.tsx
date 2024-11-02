@@ -42,11 +42,11 @@ const BookingForm = () => {
   const navigate = useNavigate();
 
   const slotsOptions = availableSlots?.data
-  .filter((slot: TSlot) => !slot.isBooked) // Filter out booked slots
-  .map((slot: TSlot) => ({
-    value: slot._id,
-    label: `${slot.startTime}-${slot.endTime}`,
-  }));
+    .filter((slot: TSlot) => !slot.isBooked) // Filter out booked slots
+    .map((slot: TSlot) => ({
+      value: slot._id,
+      label: `${slot.startTime}-${slot.endTime}`,
+    }));
 
   const handleSlotsValueChange = (
     selectedOptions: MultiValue<TSelectedOption>
@@ -55,7 +55,7 @@ const BookingForm = () => {
   };
 
   const currentDate = new Date();
-  const formattedCurrentDate = currentDate.toISOString().split('T')[0];
+  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (selectedSlots.length === 0) return toast.error("Please select a slot.");
@@ -86,17 +86,18 @@ const BookingForm = () => {
     }
   };
 
-  if (isLoading && roomDataLoading) return <Loader/>;
+  if (isLoading && roomDataLoading) return <Loader />;
   return (
     <div className="max-w-4xl mx-auto p-4">
+      <h2 className="text-2xl text-primary font-bold mt-2 mb-4">Make a Booking</h2>
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Calendar on the left */}
         <div className="lg:flex-1">
+          <p className="text-lg font-semibold mb-2">Select a Date</p>
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
-            className="rounded-md border shadow"
+            className="rounded-md border-2 border-primary shadow hover:shadow-lg "
           />
         </div>
 
@@ -117,8 +118,7 @@ const BookingForm = () => {
               control: (base) => ({
                 ...base,
                 fontSize: "14px",
-                borderColor: "#ccc",
-                boxShadow: "none",
+                border: "2px solid #674188",
                 "&:hover": {
                   borderColor: "#888",
                 },
@@ -134,7 +134,8 @@ const BookingForm = () => {
 
       {/* Form below calendar and slots */}
       {!isLoading && (
-        <div className="mt-8">
+        <div className="mt-10">
+          <h3 className="text-xl font-semibold mb-2">Your Information</h3>
           <MyForm defaultValues={userData?.data} onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <MyInput
@@ -162,11 +163,9 @@ const BookingForm = () => {
                 type="text"
               />
             </div>
-            <div className="mt-4 text-center">
-              <Button type="submit" className="bg-primary w-full md:w-auto">
+              <Button type="submit" className="bg-primary w-full md:w-auto mt-2">
                 Proceed to Checkout
               </Button>
-            </div>
           </MyForm>
         </div>
       )}
