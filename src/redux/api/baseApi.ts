@@ -15,10 +15,10 @@ type TCustomError = {
   data?: {
     message?: string;
   };
-}
-
+};
+//https://room-reserve-server.vercel.app
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://assignment-3-six-liart.vercel.app/api",
+  baseUrl: "https://room-reserve-server.vercel.app/api",
   credentials: "include",
   //this is for sending token when making a request to backend
   prepareHeaders: (headers, { getState }) => {
@@ -45,13 +45,18 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
 
   if (error?.status === 401) {
-    const res = await fetch("https://assignment-3-six-liart.vercel.app/api/auth/refresh-token", {
-      method: "POST",
-      credentials: "include",
-    });
+    const res = await fetch(
+      "https://room-reserve-server.vercel.app/api/auth/refresh-token",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
     const data = await res.json();
+    console.log(data);
 
-    if (data?.data?.accessToken) {      const user = (api.getState() as RootState).auth.user;
+    if (data?.data?.accessToken) {
+      const user = (api.getState() as RootState).auth.user;
       api.dispatch(setUser({ user, token: data.data.accessToken }));
 
       result = await baseQuery(args, api, extraOptions);
@@ -66,7 +71,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  
+
   tagTypes: ["Rooms", "Slots", "Bookings", "User"],
   endpoints: () => ({}),
 });

@@ -3,6 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Link } from "react-router-dom";
 import { FaUserTie } from "react-icons/fa";
 import { useAppDispatch } from "@/redux/hook";
+import { useLogoutMutation } from "@/redux/features/auth/authApi";
 
 type TUserDropdown = {
   user: TUser;
@@ -10,8 +11,10 @@ type TUserDropdown = {
 
 const UserDropdown = ({ user }: TUserDropdown) => {
   const dispatch = useAppDispatch();
+  const [logoutUser] = useLogoutMutation();
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
+    await logoutUser(undefined);
     dispatch(logOut());
   };
   return (

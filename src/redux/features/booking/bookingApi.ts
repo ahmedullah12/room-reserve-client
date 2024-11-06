@@ -33,9 +33,16 @@ const bookingApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Bookings"],
     }),
-    confirmBooking: builder.mutation({
+    confirmBookingWithAmarpay: builder.mutation({
       query: (bookingId) => ({
-        url: `/bookings/${bookingId}/payment`,
+        url: `/bookings/${bookingId}/pay-with-amarpay`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Bookings"],
+    }),
+    confirmBookingWithStripe: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}/pay-with-stripe`,
         method: "PUT",
       }),
       invalidatesTags: ["Bookings"],
@@ -75,7 +82,8 @@ export const {
   useGetAllBookingsQuery,
   useGetSingleBookingQuery,
   useCreateBookingMutation,
-  useConfirmBookingMutation,
+  useConfirmBookingWithAmarpayMutation,
+  useConfirmBookingWithStripeMutation,
   useGetMyBookingQuery,
   useDeleteBookingMutation,
   useCancelBookingMutation,

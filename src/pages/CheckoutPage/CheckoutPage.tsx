@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
-  useConfirmBookingMutation,
+  useConfirmBookingWithAmarpayMutation,
+  useConfirmBookingWithStripeMutation,
   useGetSingleBookingQuery,
 } from "@/redux/features/booking/bookingApi";
 import PaymentConfirmationModal from "@/components/modals/PaymentConfirmationModal";
@@ -18,6 +19,7 @@ import {
   Home,
 } from "lucide-react";
 import Loader from "@/components/Loader";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CheckoutPage = () => {
   const { bookingId } = useParams();
@@ -28,7 +30,8 @@ const CheckoutPage = () => {
   const [paymentMethod, setPaymentMethod] =
     useState<string>("Pay with Amarpay");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmBooking] = useConfirmBookingMutation();
+  const [confirmBookingWithAmarpay] = useConfirmBookingWithAmarpayMutation();
+  const [confirmBookingWithStripe] = useConfirmBookingWithStripeMutation();
 
   useEffect(() => {
     if (bookingInfo?.isConfirmed === "confirmed") {
@@ -42,14 +45,24 @@ const CheckoutPage = () => {
       return;
     }
 
-    
     if (paymentMethod === "Pay with Amarpay") {
-      const res = await confirmBooking(bookingInfo?._id).unwrap();
+      const res = await confirmBookingWithAmarpay(bookingInfo?._id).unwrap();
       if (res.data.result === "true") {
         window.location.href = res.data.payment_url;
       }
-    }else{
-      console.log(paymentMethod);
+    } else {
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
+      const response = await confirmBookingWithStripe(
+        bookingInfo?._id
+      ).unwrap();
+      console.log(response);
+      const result = await stripe?.redirectToCheckout({
+        sessionId: response.data.id,
+      });
+
+      if (result?.error) {
+        console.log(result?.error);
+      }
     }
   };
 
