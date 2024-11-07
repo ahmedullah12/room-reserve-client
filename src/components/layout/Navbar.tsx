@@ -12,7 +12,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const user = useAppSelector(useCurrentUser);
 
-  // Function to handle closing the menu when a menu item is clicked
   const handleMenuItemClick = () => {
     setOpen(false);
   };
@@ -76,7 +75,7 @@ export default function Navbar() {
                 <NavLink
                   className="px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded"
                   to={item.path}
-                  onClick={handleMenuItemClick} // Close the menu when clicked
+                  onClick={handleMenuItemClick}
                 >
                   {item.icon}
                   {item.title}
@@ -92,17 +91,17 @@ export default function Navbar() {
             ) : (
               <div>
                 <NavLink
-                  className="px-3 mb-4 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded"
+                  className="px-3 mb-4 py-2 flex items-center gap-x-3 text-primary hover:text-secondary transition-all duration-700 ease-in-out rounded"
                   to="/login"
-                  onClick={handleMenuItemClick} // Close the menu when clicked
+                  onClick={handleMenuItemClick}
                 >
                   <BiLogIn size={18} color="#674188" />
                   Login
                 </NavLink>
                 <NavLink
-                  className="ms-1 px-3 py-2 flex items-center gap-x-3 transition-all duration-700 ease-in-out rounded"
+                  className="px-3 py-2 flex items-center gap-x-3 text-primary hover:text-secondary transition-all duration-700 ease-in-out rounded"
                   to="/register"
-                  onClick={handleMenuItemClick} // Close the menu when clicked
+                  onClick={handleMenuItemClick}
                 >
                   <HiOutlineLogin size={18} color="#674188" />
                   Register
