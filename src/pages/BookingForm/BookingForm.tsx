@@ -90,8 +90,8 @@ const BookingForm = () => {
   return (
     <div className="max-w-4xl mx-auto p-4">
       <h2 className="text-2xl text-primary font-bold mt-2 mb-4">Make a Booking</h2>
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:flex-1">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="md:flex-1">
           <p className="text-lg font-semibold mb-2">Select a Date</p>
           <Calendar
             mode="single"
@@ -102,7 +102,7 @@ const BookingForm = () => {
         </div>
 
         {/* Slots selection on the right */}
-        <div className="lg:flex-1">
+        <div className="md:flex-1">
           <p className="text-lg font-semibold mb-2">Available Slots</p>
           <ReactSelect
             value={selectedSlots}
@@ -137,27 +137,27 @@ const BookingForm = () => {
         <div className="mt-10">
           <h3 className="text-xl font-semibold mb-2">Your Information</h3>
           <MyForm defaultValues={userData?.data} onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2  md:gap-4">
               <MyInput
-                width="max-w-[300px]"
+                width="w-full md:max-w-[350px]"
                 name="name"
                 label="Name"
                 type="text"
               />
               <MyInput
-                width="max-w-[300px]"
+                width="w-full md:max-w-[350px]"
                 name="email"
                 label="Email"
                 type="email"
               />
               <MyInput
-                width="max-w-[300px]"
+                width="w-full md:max-w-[350px]"
                 name="phone"
                 label="Phone"
                 type="text"
               />
               <MyInput
-                width="max-w-[300px]"
+                width="w-full md:max-w-[350px]"
                 name="address"
                 label="Address"
                 type="text"

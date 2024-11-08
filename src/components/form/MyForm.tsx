@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import {
   FieldValues,
   FormProvider,
@@ -8,17 +8,20 @@ import {
 
 type TFormConfig = {
   defaultValues?: Record<string, any>;
+  
 };
 
 type TFormProps = {
   onSubmit: SubmitHandler<FieldValues>;
   children: ReactNode;
+  isSuccess?: boolean;
 } & TFormConfig;
 
 const MyForm = ({
   onSubmit,
   children,
   defaultValues,
+  isSuccess
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
 
@@ -30,8 +33,13 @@ const MyForm = ({
 
   const submit: SubmitHandler<FieldValues> = (data) => {
     onSubmit(data);
-    methods.reset();
   };
+
+  useEffect(() => {
+    if(isSuccess) {
+      methods.reset();
+    }
+  },[isSuccess, methods])
 
   return (
     <FormProvider {...methods}>

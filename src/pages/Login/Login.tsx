@@ -1,20 +1,24 @@
 import MyForm from "@/components/form/MyForm";
 import MyInput from "@/components/form/MyInput";
 import { Button } from "@/components/ui/button";
-import { useLoginUserMutation } from "@/redux/features/auth/authApi";
+import { useCurrentUser, useLoginUserMutation } from "@/redux/features/auth/authApi";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { TError } from "@/types/global";
 import verifyJwt from "@/utils/verifyJwt";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [login, { error }] = useLoginUserMutation();
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const user = useAppSelector(useCurrentUser);
+  const [login, { error, isLoading },] = useLoginUserMutation();
   const dispatch = useAppDispatch();
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,15 +28,26 @@ const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
+      console.log(res);
 
-      const userData = verifyJwt(res.data.accessToken) as TUser;
-      dispatch(setUser({ user: userData, token: res.data.accessToken }));
-      toast.success(res.message);
-      navigate(from, { replace: true });
+      if(res.success === true){
+        const userData = verifyJwt(res.data.accessToken) as TUser;
+        dispatch(setUser({ user: userData, token: res.data.accessToken }));
+        toast.success(res.message);
+        navigate(from, { replace: true });
+        setIsSuccess(true)
+      }
+     
     } catch (err: any) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if(user){
+      navigate("/")
+    }
+  }, [user, navigate])
 
   useEffect(() => {
     if (error) {
@@ -56,7 +71,7 @@ const Login = () => {
         <div className="bg-[#F9F4F4] rounded-lg px-10 py-5 shadow-lg">
           <h1 className="mb-6 font-semibold text-2xl">Login</h1>
 
-          <MyForm onSubmit={onSubmit}>
+          <MyForm onSubmit={onSubmit} isSuccess={isSuccess}>
             <MyInput
               width="max-w-[300px]"
               name="email"
@@ -69,8 +84,10 @@ const Login = () => {
               type="password"
               label="Password"
             />
-            <Button type="submit" className="bg-primary">
-              Login
+            <Button disabled={isLoading} type="submit" className="bg-primary">
+              {
+                isLoading ? "Loading..." : "Login"
+              }
             </Button>
           </MyForm>
 

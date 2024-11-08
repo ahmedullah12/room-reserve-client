@@ -27,13 +27,13 @@ const ScrollToTop = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6">
+    <div className="fixed bottom-6 right-3 md:right-6">
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="p-3 rounded-full bg-secondary text-white shadow-lg"
+          className="p-2 md:p-3 rounded-full bg-secondary text-white shadow-lg text-sm md:text-2xl"
         >
-          <FaArrowUp size={22} />
+          <FaArrowUp  />
         </button>
       )}
     </div>
