@@ -1,5 +1,4 @@
-
-import RoomForm from "@/components/Rooms/RoomForm";
+import RoomForm from "@/components/RoomForm/RoomForm";
 
 const CreateRoom = () => {
 

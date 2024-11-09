@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [register, { error }] = useRegisterMutation();
+  const [register, { error, isLoading }] = useRegisterMutation();
 
   const dispatch = useAppDispatch();
 
@@ -106,7 +106,9 @@ const Register = () => {
               type="password"
               label="Password"
             />
-            <Button className="bg-primary ">Register</Button>
+            <Button disabled={isLoading} className="bg-primary ">
+              {isLoading ? "Registering..." : "Register"}
+            </Button>
           </MyForm>
 
           <p className="text-center mt-6 text-sm text-gray-500">

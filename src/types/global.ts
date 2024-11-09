@@ -17,7 +17,7 @@ export type TResponse<T> = {
 export type TRoom = {
   _id: string;
   name: string;
-  roomNo: number;
+  roomNumber: number;
   floorNo: number;
   capacity: number;
   pricePerSlot: number;
@@ -65,4 +65,29 @@ export type TUser = {
   role: string
   address: string
   __v: number
+}
+
+
+export interface IRoomFormProps {
+  initialValues?: {
+    _id: string;
+    name: string;
+    roomNumber: number;
+    floorNo: number;
+    capacity: number;
+    pricePerSlot: number;
+    amenities: string[];
+    images: string[];
+  };
+  isUpdate?: boolean;
+}
+
+export interface IRoomData {
+  name: string;
+  roomNumber: number;
+  floorNo: number;
+  capacity: number;
+  pricePerSlot: number;
+  amenities: string[];
+  images: string[];
 }

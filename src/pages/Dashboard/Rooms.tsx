@@ -1,6 +1,5 @@
 import Loader from "@/components/Loader";
 import DeleteModal from "@/components/modals/DeleteModal";
-import { Button } from "@/components/ui/button";
 import {
   useDeleteRoomMutation,
   useGetAllRoomsQuery,
@@ -39,7 +38,7 @@ const Rooms = () => {
       <div className="w-full h-[1px] bg-accent my-6"></div>
       <div className="flex justify-end mb-4">
         <Link to="/dashboard/rooms/create">
-          <Button className="bg-primary">Create Room</Button>
+          <button className=" px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">Create Room</button>
         </Link>
       </div>
       <div className="overflow-x-auto">
@@ -68,7 +67,7 @@ const Rooms = () => {
           {rooms?.data?.map((room: TRoom) => (
               <tr key={room._id}>
                 <td className="py-4 px-4 border-b">{room.name}</td>
-                <td className="px-4 border-b">{room.roomNo}</td>
+                <td className="px-4 border-b">{room.roomNumber}</td>
                 <td className="px-4 border-b">{room.floorNo}</td>
                 <td className="px-4 border-b">{room.capacity}</td>
                 <td className="px-4 border-b">
@@ -81,7 +80,7 @@ const Rooms = () => {
                         ? ""
                         : `/dashboard/rooms/update/${room._id}`
                     }`}
-                    className={`mr-2 mb-1 md:mb-0 px-2 py-1 ${
+                    className={`mr-2 mb-1 md:mb-0 px-2 py-[6px] ${
                       room.isDeleted
                         ? "bg-gray-300"
                         : "bg-primary hover:bg-secondary"

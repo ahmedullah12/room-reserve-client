@@ -83,7 +83,7 @@ const Slots = () => {
             {slotsData?.data.map((slot: TSlot) => (
               <tr key={slot._id}>
                 <td className="py-4 px-4 border-b">{slot.room.name}</td>
-                <td className="px-4 border-b">{slot.room.roomNo}</td>
+                <td className="px-4 border-b">{slot.room.roomNumber}</td>
                 <td className="px-4 border-b">{slot.date}</td>
                 <td className="px-4 border-b">{slot.startTime}</td>
                 <td className="px-4 border-b">{slot.endTime}</td>

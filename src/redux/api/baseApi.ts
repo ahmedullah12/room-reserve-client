@@ -18,7 +18,7 @@ type TCustomError = {
 };
 //https://room-reserve-server.vercel.app
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://room-reserve-server.vercel.app/api",
   credentials: "include",
   //this is for sending token when making a request to backend
   prepareHeaders: (headers, { getState }) => {
@@ -46,7 +46,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
   if (error?.status === 401) {
     const res = await fetch(
-      "http://localhost:5000/api/auth/refresh-token",
+      "https://room-reserve-server.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",

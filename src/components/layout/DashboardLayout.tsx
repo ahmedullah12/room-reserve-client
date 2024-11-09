@@ -143,7 +143,7 @@ const DashboardLayout: React.FC = () => {
       </div>
 
       {/* Main content area */}
-      <div className="flex-grow overflow-auto p-4 ml-64 md:ml-80">
+      <div className="flex-grow overflow-auto p-4  md:ml-80">
         <Outlet />
       </div>
     </div>

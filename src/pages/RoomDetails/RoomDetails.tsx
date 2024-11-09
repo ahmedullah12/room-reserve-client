@@ -22,7 +22,7 @@ const RoomDetails = () => {
               {roomData.data.name}
             </h2>
             <p className="text-lg mb-2">
-              <strong>Room No:</strong> {roomData.data.roomNo}
+              <strong>Room No:</strong> {roomData.data.roomNumber}
             </p>
             <p className="text-lg mb-2">
               <strong>Floor No:</strong> {roomData.data.floorNo}

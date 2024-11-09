@@ -28,8 +28,8 @@ const DeleteModal = ({ title, id, method, isDeleted, isRejected=true, isConfirme
       <DialogTrigger asChild>
         <button
           disabled={isDeleted || !isRejected || isConfirmed || isBooked}
-          className={`px-2 py-1 bg-red-500 hover:bg-red-600"
-          } text-sm text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed`}
+          className={`mt-2 md:mt-0 px-2 py-1 bg-red-500 hover:bg-red-400
+           text-sm text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed`}
         >
           {isDeleted ? "Deleted" : "Delete"}
         </button>
