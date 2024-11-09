@@ -3,10 +3,18 @@ import { baseApi } from "@/redux/api/baseApi";
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllUser: builder.query({
-      query: () => ({
-        url: `/users`,
-        method: "GET",
-      }),
+      query: ({ sort, page, limit }) => {
+        const params = new URLSearchParams();
+
+        if (sort) params.append("sort", sort);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+
+        return {
+          url: `/users?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["User"],
     }),
     getUserData: builder.query({
@@ -26,4 +34,5 @@ const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUserQuery, useGetUserDataQuery, useMakeAdminMutation } = userApi;
+export const { useGetAllUserQuery, useGetUserDataQuery, useMakeAdminMutation } =
+  userApi;

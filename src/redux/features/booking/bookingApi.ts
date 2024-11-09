@@ -3,10 +3,18 @@ import { baseApi } from "@/redux/api/baseApi";
 const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBookings: builder.query({
-      query: () => ({
-        url: `/bookings`,
-        method: "GET",
-      }),
+      query: ({ sort, page, limit }) => {
+        const params = new URLSearchParams({});
+
+        if (sort) params.append("sort", sort);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+
+        return {
+          url: `/bookings?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["Bookings"],
     }),
     getSingleBooking: builder.query({

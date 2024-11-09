@@ -1,5 +1,6 @@
 import Loader from "@/components/Loader";
 import DeleteModal from "@/components/modals/DeleteModal";
+import Pagination from "@/components/Pagination";
 import {
   useDeleteRoomMutation,
   useGetAllRoomsQuery,
@@ -10,35 +11,50 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Rooms = () => {
-  const [openDeleteModals, setOpenDeleteModals] = useState<{ [key: string]: boolean }>({});
+  const [openDeleteModals, setOpenDeleteModals] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const roomsPerPage = 8;
 
-  const { data: rooms, isLoading } = useGetAllRoomsQuery({});
+  const { data: rooms, isLoading } = useGetAllRoomsQuery({
+    page: currentPage,
+    limit: roomsPerPage,
+    sort: "name",
+  });
   const [deleteRoom] = useDeleteRoomMutation();
 
   const handleDeleteRoom = async (id: string) => {
     const res = await deleteRoom(id).unwrap();
-    if(res.success){
+    if (res.success) {
       toast.success("Room is deleted successfully!!!");
-      setOpenDeleteModals(prev => ({ ...prev, [id]: false }));
+      setOpenDeleteModals((prev) => ({ ...prev, [id]: false }));
     }
   };
 
   const handleOpenDeleteModal = (id: string) => {
-    setOpenDeleteModals(prev => ({ ...prev, [id]: true }));
+    setOpenDeleteModals((prev) => ({ ...prev, [id]: true }));
   };
 
   const handleCloseDeleteModal = (id: string) => {
-    setOpenDeleteModals(prev => ({ ...prev, [id]: false }));
+    setOpenDeleteModals((prev) => ({ ...prev, [id]: false }));
   };
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
+
+  const meta = rooms?.meta;
+
+  const totalPages = Math.ceil(meta.total / roomsPerPage);
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-4">Room List</h1>
       <div className="w-full h-[1px] bg-accent my-6"></div>
       <div className="flex justify-end mb-4">
         <Link to="/dashboard/rooms/create">
-          <button className=" px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">Create Room</button>
+          <button className=" px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">
+            Create Room
+          </button>
         </Link>
       </div>
       <div className="overflow-x-auto">
@@ -64,15 +80,13 @@ const Rooms = () => {
             </tr>
           </thead>
           <tbody>
-          {rooms?.data?.map((room: TRoom) => (
+            {rooms?.data?.map((room: TRoom) => (
               <tr key={room._id}>
                 <td className="py-4 px-4 border-b">{room.name}</td>
                 <td className="px-4 border-b">{room.roomNumber}</td>
                 <td className="px-4 border-b">{room.floorNo}</td>
                 <td className="px-4 border-b">{room.capacity}</td>
-                <td className="px-4 border-b">
-                  {room.pricePerSlot}
-                </td>
+                <td className="px-4 border-b">{room.pricePerSlot}</td>
                 <td className="py-2 px-4 border-b border-r">
                   <Link
                     to={`${
@@ -94,13 +108,29 @@ const Rooms = () => {
                     method={handleDeleteRoom}
                     isDeleted={room.isDeleted}
                     open={openDeleteModals[room._id] || false}
-                    setOpen={(open) => open ? handleOpenDeleteModal(room._id) : handleCloseDeleteModal(room._id)}
+                    setOpen={(open) =>
+                      open
+                        ? handleOpenDeleteModal(room._id)
+                        : handleCloseDeleteModal(room._id)
+                    }
                   />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div>
+        {meta.total > roomsPerPage && (
+          <>
+            <div className="bg-primary opacity-10 h-[1px] w-full mt-8 mb-4" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ const CreateSlot = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-primary">Create Slot</Button>
+        <button className="px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">Create Slot</button>
       </DialogTrigger>
       <DialogContent>
         <DialogTitle className="text-xl font-semibold">Create Slot</DialogTitle>

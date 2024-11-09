@@ -1,5 +1,6 @@
 import Loader from "@/components/Loader";
 import DeleteModal from "@/components/modals/DeleteModal";
+import Pagination from "@/components/Pagination";
 import {
   useApproveBookingMutation,
   useDeleteBookingMutation,
@@ -14,7 +15,14 @@ const BookingList = () => {
   const [openDeleteModals, setOpenDeleteModals] = useState<{
     [key: string]: boolean;
   }>({});
-  const { data: bookings, isLoading } = useGetAllBookingsQuery(undefined);
+  const [currentPage, setCurrentPage] = useState(1);
+  const bookingsPerPage = 8;
+
+  const { data: bookings, isLoading } = useGetAllBookingsQuery({
+    page: currentPage,
+    limit: bookingsPerPage,
+    sort: "date",
+  });
 
   const [deleteBooking] = useDeleteBookingMutation();
   const [approveBooking] = useApproveBookingMutation();
@@ -49,7 +57,11 @@ const BookingList = () => {
     }
   };
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
+
+  const meta = bookings?.meta;
+
+  const totalPages = Math.ceil(meta.total / bookingsPerPage);
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-4">Booking List</h1>
@@ -136,6 +148,18 @@ const BookingList = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div>
+        {meta.total > bookingsPerPage && (
+          <>
+            <div className="bg-primary opacity-10 h-[1px] w-full mt-8 mb-4" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </>
+        )}
       </div>
     </div>
   );

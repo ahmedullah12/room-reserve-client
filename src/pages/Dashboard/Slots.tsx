@@ -41,7 +41,7 @@ const Slots = () => {
     setOpenDeleteModals((prev) => ({ ...prev, [id]: false }));
   };
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
 
   const meta = slotsData?.meta;
 
@@ -119,11 +119,14 @@ const Slots = () => {
           </tbody>
         </table>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div>
+        <div className="bg-primary opacity-10 h-[1px] w-full mt-8 mb-4" />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

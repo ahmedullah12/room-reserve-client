@@ -1,5 +1,5 @@
 import Loader from "@/components/Loader";
-import RoomForm from "@/components/Rooms/RoomForm";
+import RoomForm from "@/components/RoomForm/RoomForm";
 import { useGetSingleRoomQuery } from "@/redux/features/rooms/roomsApi";
 import { useParams } from "react-router-dom";
 

@@ -37,12 +37,14 @@ const RoomForm: React.FC<IRoomFormProps> = ({
     uploadImages,
   } = useImageUpload(initialValues?.images);
 
+  console.log(imageUrls);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (amenities.length === 0) {
       return toast.error("Please add at least one amenity");
     }
 
-    if (images.length === 0) {
+    if (images.length === 0 && imageUrls.length === 0) {
       toast.error("At least one image is required");
       return;
     }
