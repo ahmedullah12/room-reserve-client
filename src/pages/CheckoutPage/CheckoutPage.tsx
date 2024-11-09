@@ -8,19 +8,13 @@ import {
 } from "@/redux/features/booking/bookingApi";
 import PaymentConfirmationModal from "@/components/modals/PaymentConfirmationModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Calendar,
-  Clock,
-  DollarSign,
-  User,
-  Mail,
-  Phone,
-  Home,
-  CreditCard,
-  CheckCircle,
-} from "lucide-react";
+import { CreditCard, CheckCircle } from "lucide-react";
 import Loader from "@/components/Loader";
 import { loadStripe } from "@stripe/stripe-js";
+import { TError } from "@/types/global";
+import toast from "react-hot-toast";
+import ConfirmationModal from "@/components/Checkout/ConfirmationModal";
+import BookingDetails from "@/components/Checkout/BookingDetails";
 
 const CheckoutPage = () => {
   const { bookingId } = useParams();
@@ -29,8 +23,10 @@ const CheckoutPage = () => {
   const bookingInfo = booking?.data;
   const [paymentMethod, setPaymentMethod] = useState("Pay with Amarpay");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmBookingWithAmarpay] = useConfirmBookingWithAmarpayMutation();
-  const [confirmBookingWithStripe] = useConfirmBookingWithStripeMutation();
+  const [confirmBookingWithAmarpay, { error: aamarPayError }] =
+    useConfirmBookingWithAmarpayMutation();
+  const [confirmBookingWithStripe, { error: stripeError }] =
+    useConfirmBookingWithStripeMutation();
 
   useEffect(() => {
     if (bookingInfo?.isConfirmed === "confirmed") {
@@ -51,7 +47,9 @@ const CheckoutPage = () => {
       }
     } else {
       const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PK);
-      const response = await confirmBookingWithStripe(bookingInfo?._id).unwrap();
+      const response = await confirmBookingWithStripe(
+        bookingInfo?._id
+      ).unwrap();
       const result = await stripe?.redirectToCheckout({
         sessionId: response.data.id,
       });
@@ -67,98 +65,32 @@ const CheckoutPage = () => {
     navigate(`/my-bookings`);
   };
 
+  useEffect(() => {
+    const error =
+      paymentMethod === "Pay with Amarpay" ? aamarPayError : stripeError;
+    if (error) {
+      const err = error as TError;
+      if (err.data?.message) {
+        toast.error(err.data.message);
+      } else {
+        toast.error("An unexpected error occurred. Please try again later.");
+      }
+    }
+  }, [aamarPayError, stripeError, paymentMethod]);
+
   if (isLoading) return <Loader />;
 
   return (
     <div className="min-h-screen py-4">
       <div className="max-w-5xl mx-auto px-3">
-        <h1 className="text-2xl font-bold text-primary mb-4">Checkout</h1>
-        
+        <h1 className="text-2xl font-bold text-primary">Checkout</h1>
+        <p className="mb-4">
+          Please confirm the booking within 30 mins or it will get cancelled.
+        </p>
+
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Left Column - Booking Details */}
-          <div className="lg:w-2/3 space-y-4">
-            <Card className="overflow-hidden">
-              <CardHeader className="bg-primary/5 py-3">
-                <CardTitle className="text-lg text-primary">
-                  Booking Summary
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="grid gap-3">
-                  <div className="flex items-center p-2 bg-gray-50 rounded">
-                    <Calendar className="w-5 h-5 text-primary" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Room</p>
-                      <p className="font-medium text-sm">{bookingInfo?.roomName}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center p-2 bg-gray-50 rounded">
-                    <Clock className="w-5 h-5 text-primary" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Date & Time</p>
-                      <p className="font-medium text-sm">
-                        {bookingInfo?.date} | {bookingInfo?.time.join(", ")}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center p-2 bg-gray-50 rounded">
-                    <DollarSign className="w-5 h-5 text-primary" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Total Cost</p>
-                      <p className="font-medium text-sm">
-                        ${bookingInfo?.totalAmount}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="bg-primary/5 py-3">
-                <CardTitle className="text-lg text-primary">
-                  Personal Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="grid gap-3">
-                  <div className="flex items-center">
-                    <User className="w-4 h-4 text-gray-400" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Full Name</p>
-                      <p className="font-medium text-sm">{bookingInfo?.name}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <Mail className="w-4 h-4 text-gray-400" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Email</p>
-                      <p className="font-medium text-sm">{bookingInfo?.email}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <Phone className="w-4 h-4 text-gray-400" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Phone</p>
-                      <p className="font-medium text-sm">{bookingInfo?.phone}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <Home className="w-4 h-4 text-gray-400" />
-                    <div className="ml-3">
-                      <p className="text-xs text-gray-500">Address</p>
-                      <p className="font-medium text-sm">{bookingInfo?.address}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <BookingDetails bookingInfo={bookingInfo} />
 
           {/* Right Column - Payment Options */}
           <div className="lg:w-1/3">
@@ -180,7 +112,9 @@ const CheckoutPage = () => {
                     />
                     <div className="ml-3 flex items-center">
                       <CreditCard className="w-4 h-4 text-primary mr-2" />
-                      <span className="font-medium text-sm">Pay with Amarpay</span>
+                      <span className="font-medium text-sm">
+                        Pay with Amarpay
+                      </span>
                     </div>
                   </label>
 
@@ -194,7 +128,9 @@ const CheckoutPage = () => {
                     />
                     <div className="ml-3 flex items-center">
                       <CreditCard className="w-4 h-4 text-primary mr-2" />
-                      <span className="font-medium text-sm">Pay with Stripe</span>
+                      <span className="font-medium text-sm">
+                        Pay with Stripe
+                      </span>
                     </div>
                   </label>
                 </div>
@@ -217,38 +153,10 @@ const CheckoutPage = () => {
       {/* Confirmation Modal */}
       {isModalOpen && (
         <PaymentConfirmationModal open={isModalOpen} onClose={handleCloseModal}>
-          <div className="p-4 text-center">
-            <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-            <h2 className="text-xl font-bold mb-3">Booking Confirmed!</h2>
-            <div className="space-y-2 text-left bg-gray-50 p-3 rounded mb-4">
-              <p className="flex items-center text-sm">
-                <Calendar className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="font-medium">Room:</span>
-                <span className="ml-2">{bookingInfo?.roomName}</span>
-              </p>
-              <p className="flex items-center text-sm">
-                <Clock className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="font-medium">Date & Time:</span>
-                <span className="ml-2">
-                  {bookingInfo?.date} | {bookingInfo?.time.join(", ")}
-                </span>
-              </p>
-              <p className="flex items-center text-sm">
-                <DollarSign className="w-4 h-4 mr-2 text-gray-500" />
-                <span className="font-medium">Total Cost:</span>
-                <span className="ml-2">${bookingInfo?.totalAmount}</span>
-              </p>
-            </div>
-            <p className="text-gray-600 text-sm mb-4">
-              Thank you for your booking! We look forward to hosting you.
-            </p>
-            <Button
-              onClick={handleCloseModal}
-              className="w-full bg-primary hover:bg-primary/90 text-white py-2 text-sm font-medium rounded"
-            >
-              View My Bookings
-            </Button>
-          </div>
+          <ConfirmationModal
+            bookingInfo={bookingInfo}
+            handleCloseModal={handleCloseModal}
+          />
         </PaymentConfirmationModal>
       )}
     </div>
