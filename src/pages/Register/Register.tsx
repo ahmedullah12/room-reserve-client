@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hook";
+import { TError } from "@/types/global";
 import verifyJwt from "@/utils/verifyJwt";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [register] = useRegisterMutation();
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const [register, { error }] = useRegisterMutation();
 
   const dispatch = useAppDispatch();
 
@@ -25,14 +29,29 @@ const Register = () => {
 
     try {
       const res = await register(registerData).unwrap();
-      const userData = verifyJwt(res.data.accessToken) as TUser;
-      dispatch(setUser({ user: userData, token: res.data.accessToken }));
-      toast.success(res.message);
-      navigate("/");
+
+      if (res.success === true) {
+        const userData = verifyJwt(res.data.accessToken) as TUser;
+        dispatch(setUser({ user: userData, token: res.data.accessToken }));
+        toast.success(res.message);
+        navigate("/");
+        setIsSuccess(true);
+      }
     } catch (err: any) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      const err = error as TError;
+      if (err.data) {
+        toast.error(err.data.message);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
+    }
+  }, [error]);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white overflow-y-auto relative">
@@ -52,7 +71,7 @@ const Register = () => {
         <div className="bg-[#F9F4F4] shadow-lg rounded-lg px-10 py-8">
           <h1 className="mb-6 font-semibold text-2xl">Create Account</h1>
 
-          <MyForm onSubmit={onSubmit}>
+          <MyForm onSubmit={onSubmit} isSuccess={isSuccess}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <MyInput
                 width="max-w-[300px]"

@@ -28,7 +28,6 @@ const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
-      console.log(res);
 
       if(res.success === true){
         const userData = verifyJwt(res.data.accessToken) as TUser;
