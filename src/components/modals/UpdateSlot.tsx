@@ -65,6 +65,7 @@ const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
       </DialogTrigger>
       <DialogContent>
         <DialogTitle>Update Slot</DialogTitle>
+        <div className="mb-6 bg-secondary w-full h-[1px]"/>
         <SlotFields
           room={room}
           onRoomChange={setRoom}

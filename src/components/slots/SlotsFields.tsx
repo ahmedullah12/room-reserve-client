@@ -1,4 +1,3 @@
-
 import { Button } from "../ui/button";
 import {
   Select,
@@ -16,7 +15,6 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
-import Loader from "../Loader";
 
 type TOption = {
   value: string;
@@ -68,81 +66,91 @@ const SlotFields = ({
     return `${hour}:00`;
   });
 
-  if (isLoading) return <Loader/>;
-
   return (
     <div className="space-y-6 overflow-y-auto">
-      {/* Room Selection */}
-      <Select onValueChange={onRoomChange} value={room}>
-        <SelectTrigger className="w-full max-w-[300px]">
-          <SelectValue placeholder="Select Room" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {roomsOptions?.map((opt: TOption, i: number) => (
-              <SelectItem key={i} value={opt.value}>
-                {opt.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      {isLoading ? (
+        <div className="min-h-[300px] flex justify-center items-center">
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <>
+          {/* Room Selection */}
+          <Select onValueChange={onRoomChange} value={room}>
+            <SelectTrigger className="w-full max-w-[400px]">
+              <SelectValue placeholder="Select Room" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {roomsOptions?.map((opt: TOption, i: number) => (
+                  <SelectItem key={i} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
-      {/* Date Picker */}
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant={"outline"}
-            className={cn(
-              "w-full max-w-[300px] justify-start text-left font-normal",
-              !selectedDate && "text-muted-foreground"
-            )}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="single"
-            selected={selectedDate}
-            onSelect={setSelectedDate}
-            initialFocus
-          />
-        </PopoverContent>
-      </Popover>
+          {/* Date Picker */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full max-w-[400px] justify-start text-left font-normal border-primary border-2",
+                  !selectedDate && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {selectedDate ? (
+                  format(selectedDate, "PPP")
+                ) : (
+                  <span>Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={selectedDate}
+                onSelect={setSelectedDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
 
-      {/* Start Time Selection */}
-      <Select onValueChange={onStartTimeChange} value={startTime}>
-        <SelectTrigger className="w-full max-w-[300px]">
-          <SelectValue placeholder="Select Start Time" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {timeOptions.map((time, i) => (
-              <SelectItem key={i} value={time}>
-                {time}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+          {/* Start Time Selection */}
+          <Select onValueChange={onStartTimeChange} value={startTime}>
+            <SelectTrigger className="w-full max-w-[400px]">
+              <SelectValue placeholder="Select Start Time" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {timeOptions.map((time, i) => (
+                  <SelectItem key={i} value={time}>
+                    {time}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
-      {/* End Time Selection */}
-      <Select onValueChange={onEndTimeChange} value={endTime}>
-        <SelectTrigger className="w-full max-w-[300px]">
-          <SelectValue placeholder="Select End Time" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {timeOptions.map((time, i) => (
-              <SelectItem key={i} value={time}>
-                {time}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+          {/* End Time Selection */}
+          <Select onValueChange={onEndTimeChange} value={endTime}>
+            <SelectTrigger className="w-full max-w-[400px]">
+              <SelectValue placeholder="Select End Time" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {timeOptions.map((time, i) => (
+                  <SelectItem key={i} value={time}>
+                    {time}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </>
+      )}
     </div>
   );
 };

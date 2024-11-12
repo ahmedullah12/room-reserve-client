@@ -49,6 +49,7 @@ const CreateSlot = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogTitle className="text-xl font-semibold">Create Slot</DialogTitle>
+        <div className="mb-6 bg-secondary w-full h-[1px]"/>
         <SlotFields
           room={room}
           date={date?.toISOString()}
@@ -59,7 +60,7 @@ const CreateSlot = () => {
           onStartTimeChange={setStartTime}
           onEndTimeChange={setEndTime}
         />
-        <Button className="bg-primary w-full max-w-[300px]" onClick={handleSubmit}>
+        <Button className="bg-primary w-full max-w-[400px]" onClick={handleSubmit}>
           Submit
         </Button>
       </DialogContent>
