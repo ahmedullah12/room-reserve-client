@@ -1,0 +1,38 @@
+name: CI/CD Pipeline for Room Reserve
+
+# Trigger the workflow on push and pull requests to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Define the jobs that will run as part of the workflow
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16" # or the version you’re using
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests (assuming you have tests configured in your project)
+      - name: Run tests
+        run: npm test -- --watchAll=false
+
+      # Step 5: Build the project
+      - name: Build the project
+        run: npm run build
