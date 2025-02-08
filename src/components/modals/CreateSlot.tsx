@@ -5,8 +5,9 @@ import { useState } from "react";
 import { useCreateSlotMutation } from "@/redux/features/slots/slotsApi";
 import toast from "react-hot-toast";
 import SlotFields from "../slots/SlotsFields";
+import { TRoom } from "@/types/global";
 
-const CreateSlot = () => {
+const CreateSlot = ({ roomsData }: { roomsData: { data: TRoom[] } }) => {
   const [room, setRoom] = useState<string>("");
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [startTime, setStartTime] = useState<string>("");
@@ -28,7 +29,7 @@ const CreateSlot = () => {
         endTime,
       };
       const res = await createSlot(slotData).unwrap();
-      if(res.success === true){
+      if (res.success === true) {
         toast.success("Slot created successfully");
         setRoom("");
         setDate(undefined);
@@ -45,12 +46,15 @@ const CreateSlot = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className="px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">Create Slot</button>
+        <button className="px-3 py-2 bg-primary hover:bg-secondary text-white text-xs md:text-sm font-semibold rounded-md">
+          Create Slot
+        </button>
       </DialogTrigger>
       <DialogContent>
         <DialogTitle className="text-xl font-semibold">Create Slot</DialogTitle>
-        <div className="mb-6 bg-secondary w-full h-[1px]"/>
+        <div className="mb-6 bg-secondary w-full h-[1px]" />
         <SlotFields
+          roomsData={roomsData}
           room={room}
           date={date?.toISOString()}
           startTime={startTime}
@@ -60,7 +64,10 @@ const CreateSlot = () => {
           onStartTimeChange={setStartTime}
           onEndTimeChange={setEndTime}
         />
-        <Button className="bg-primary w-full max-w-[400px]" onClick={handleSubmit}>
+        <Button
+          className="bg-primary w-full max-w-[400px]"
+          onClick={handleSubmit}
+        >
           Submit
         </Button>
       </DialogContent>

@@ -10,6 +10,7 @@ import {
 import { TSlot } from "@/types/global";
 import Pagination from "@/components/Pagination";
 import Loader from "@/components/Loader";
+import { useGetAllRoomsQuery } from "@/redux/features/rooms/roomsApi";
 
 const Slots = () => {
   const [openDeleteModals, setOpenDeleteModals] = useState<{
@@ -17,6 +18,8 @@ const Slots = () => {
   }>({});
   const [currentPage, setCurrentPage] = useState(1);
   const slotsPerPage = 8;
+
+  const { data: roomsData, isLoading: roomLoading } = useGetAllRoomsQuery({});
 
   const { data: slotsData, isLoading } = useGetAvailableSlotsQuery({
     page: currentPage,
@@ -41,7 +44,7 @@ const Slots = () => {
     setOpenDeleteModals((prev) => ({ ...prev, [id]: false }));
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || roomLoading) return <Loader />;
 
   const meta = slotsData?.meta;
 
@@ -52,7 +55,7 @@ const Slots = () => {
       <h1 className="text-2xl font-semibold mb-4">Slots List</h1>
       <div className="w-full h-[1px] bg-accent my-6"></div>
       <div className="flex justify-end mb-4">
-        <CreateSlot />
+        <CreateSlot roomsData={roomsData} />
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
@@ -99,7 +102,11 @@ const Slots = () => {
                   )}
                 </td>
                 <td className="px-4 border-b">
-                  <UpdateSlot isBooked={slot.isBooked} initialData={slot} />
+                  <UpdateSlot
+                    roomsData={roomsData}
+                    isBooked={slot.isBooked}
+                    initialData={slot}
+                  />
                   <DeleteModal
                     title={`this ${slot.room.name} slot?`}
                     id={slot._id}

@@ -5,8 +5,10 @@ import { useUpdateSlotMutation } from "@/redux/features/slots/slotsApi";
 import toast from "react-hot-toast";
 import SlotFields from "../slots/SlotsFields";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { TRoom } from "@/types/global";
 
 type UpdateSlotProps = {
+  roomsData: { data: TRoom[] };
   initialData: {
     _id: string;
     room: { _id: string; name: string };
@@ -18,12 +20,13 @@ type UpdateSlotProps = {
   isBooked: boolean;
 };
 
-const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
+const UpdateSlot = ({ roomsData, initialData, isBooked }: UpdateSlotProps) => {
   const [room, setRoom] = useState(initialData.room._id);
   const [date, setDate] = useState(new Date(initialData.date));
   const [startTime, setStartTime] = useState(initialData.startTime);
   const [endTime, setEndTime] = useState(initialData.endTime);
   const [isOpen, setIsOpen] = useState(false);
+
 
   const [updateSlot] = useUpdateSlotMutation();
 
@@ -53,6 +56,7 @@ const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
     }
   };
 
+  
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -65,8 +69,9 @@ const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
       </DialogTrigger>
       <DialogContent>
         <DialogTitle>Update Slot</DialogTitle>
-        <div className="mb-6 bg-secondary w-full h-[1px]"/>
+        <div className="mb-6 bg-secondary w-full h-[1px]" />
         <SlotFields
+          roomsData={roomsData}
           room={room}
           onRoomChange={setRoom}
           date={date.toISOString()}
@@ -76,7 +81,12 @@ const UpdateSlot = ({ initialData, isBooked }: UpdateSlotProps) => {
           endTime={endTime}
           onEndTimeChange={setEndTime}
         />
-        <Button className="bg-primary w-full max-w-[300px]" onClick={handleSubmit}>Submit</Button>
+        <Button
+          className="bg-primary w-full max-w-[300px]"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
       </DialogContent>
     </Dialog>
   );

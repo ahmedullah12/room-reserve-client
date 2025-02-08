@@ -23,7 +23,7 @@ const UserDropdown = ({ user }: TUserDropdown) => {
         <PopoverTrigger className="ms-[6px] px-2 py-1 flex items-center gap-3 text-primary md:text-white rounded">
           <FaUserTie /> {user.name}
         </PopoverTrigger>
-        <PopoverContent className="w-32 bg-accent border-none">
+        <PopoverContent className="w-40 bg-accent border-none">
           {user.role === "user" ? (
             <Link className="hover:underline" to="/my-bookings">
               My Bookings
