@@ -49,7 +49,7 @@ const Advertisement = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-[#FFFDF9] p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 flex flex-col h-full"
+              className="bg-accent p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 flex flex-col h-full"
             >
               <div className="bg-secondary bg-opacity-20 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 {service.icon}

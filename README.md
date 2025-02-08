@@ -14,17 +14,17 @@ Room Reserve is a premier booking room management system designed to streamline 
 
 ## Features
 
-- At first, you can see the Home page. It contains some good sections.
-- After that, there is the Meeting Rooms page. Here you can see all the rooms.
-- In the Meeting Rooms page, you can search rooms or filter them.
-- You can also go to Room Details page, there you can see the details and create a booking for the room and they add payment
-- After that you can see very good About Us and Contact Us page.
-- For User, they can see their bookings in My Booking page, there they can confirm or cancel booking
-- There is a dashboard for Admin, there they can do a lot of things
-- Admin can create  a room, then they can update or delete  a room
-- Admin can create slots for rooms, and can update slot or delete them
-- There is also the Booking list page in dashboard, there admin has the access to reject or approve a booking and delete them
-- Another page in dashboard is the Users list page, there all the user showed and admin can make new admin
+ At first, you can see the Home page. It contains some good sections.
+ After that, there is the Meeting Rooms page. Here you can see all the rooms.
+ In the Meeting Rooms page, you can search rooms or filter them.
+ You can also go to Room Details page, there you can see the details and create a booking for the room and they add payment
+ After that you can see very good About Us and Contact Us page.
+ For User, they can see their bookings in My Booking page, there they can confirm or cancel booking
+ There is a dashboard for Admin, there they can do a lot of things
+ Admin can create  a room, then they can update or delete  a room
+ Admin can create slots for rooms, and can update slot or delete them
+ There is also the Booking list page in dashboard, there admin has the access to reject or approve a booking and delete them
+ Another page in dashboard is the Users list page, there all the user showed and admin can make new admin
 
 ## Technology Stack
 

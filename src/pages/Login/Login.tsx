@@ -1,7 +1,10 @@
 import MyForm from "@/components/form/MyForm";
 import MyInput from "@/components/form/MyInput";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser, useLoginUserMutation } from "@/redux/features/auth/authApi";
+import {
+  useCurrentUser,
+  useLoginUserMutation,
+} from "@/redux/features/auth/authApi";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { TError } from "@/types/global";
@@ -16,9 +19,8 @@ const Login = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const user = useAppSelector(useCurrentUser);
-  const [login, { error, isLoading },] = useLoginUserMutation();
+  const [login, { error, isLoading }] = useLoginUserMutation();
   const dispatch = useAppDispatch();
-
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,24 +31,23 @@ const Login = () => {
     try {
       const res = await login(data).unwrap();
 
-      if(res.success === true){
+      if (res.success === true) {
         const userData = verifyJwt(res.data.accessToken) as TUser;
         dispatch(setUser({ user: userData, token: res.data.accessToken }));
         toast.success(res.message);
         navigate(from, { replace: true });
-        setIsSuccess(true)
+        setIsSuccess(true);
       }
-     
     } catch (err: any) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    if(user){
-      navigate("/")
+    if (user) {
+      navigate("/");
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   useEffect(() => {
     if (error) {
@@ -62,8 +63,14 @@ const Login = () => {
     <div className="h-screen flex justify-center items-center bg-white  relative">
       <div className="absolute top-2 left-4">
         <Link to="/" className="flex items-center gap-2">
-          <MdOutlineKeyboardBackspace color="#674188" className="mt-[2px]" size={30}/>
-          <span className="text-xl text-primary font-semibold ">Back to Home</span>
+          <MdOutlineKeyboardBackspace
+            color="#674188"
+            className="mt-[2px]"
+            size={30}
+          />
+          <span className="text-xl text-primary font-semibold ">
+            Back to Home
+          </span>
         </Link>
       </div>
       <div className="w-full md:w-[500px] px-4">
@@ -84,9 +91,7 @@ const Login = () => {
               label="Password"
             />
             <Button disabled={isLoading} type="submit" className="bg-primary">
-              {
-                isLoading ? "Loading..." : "Login"
-              }
+              {isLoading ? "Loading..." : "Login"}
             </Button>
           </MyForm>
 

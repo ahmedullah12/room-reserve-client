@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="w-full md:w-1/2 bg-[#FFFDF9] p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="w-full md:w-1/2 bg-accent p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <h3 className="text-[24px] font-semibold text-primary mb-4">
                 {feature.title}

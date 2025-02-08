@@ -21,8 +21,17 @@ type TDeletePayload = {
   setOpen: (open: boolean) => void;
 };
 
-const DeleteModal = ({ title, id, method, isDeleted, isRejected=true, isConfirmed=false,isBooked=false, open, setOpen }: TDeletePayload) => {
-
+const DeleteModal = ({
+  title,
+  id,
+  method,
+  isDeleted,
+  isRejected = true,
+  isConfirmed = false,
+  isBooked = false,
+  open,
+  setOpen,
+}: TDeletePayload) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -42,7 +51,13 @@ const DeleteModal = ({ title, id, method, isDeleted, isRejected=true, isConfirme
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button type="submit" className="bg-primary" onClick={() => method(id)}>Delete</Button>
+          <Button
+            type="submit"
+            className="bg-primary"
+            onClick={() => method(id)}
+          >
+            Delete
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
