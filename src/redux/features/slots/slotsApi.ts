@@ -4,15 +4,12 @@ const slotsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAvailableSlots: builder.query({
       query: ({ date, roomId, page, limit }) => {
-        // Initialize query string
         let queryParams = `page=${page}&limit=${limit}`;
     
-        
         if (date) {
           queryParams += `&date=${date}`;
         }
     
-        
         if (roomId) {
           queryParams += `&roomId=${roomId}`;
         }
