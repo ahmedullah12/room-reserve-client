@@ -25,10 +25,18 @@ const bookingApi = baseApi.injectEndpoints({
       providesTags: ["Bookings"],
     }),
     getMyBooking: builder.query({
-      query: () => ({
-        url: `/my-bookings`,
+      query: ({sort, page, limit}) => {
+        const params = new URLSearchParams({});
+
+        if (sort) params.append("sort", sort);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+
+        return {
+        url: `/my-bookings?${params.toString()}`,
         method: "GET",
-      }),
+      }
+      },
       providesTags: ["Bookings"],
     }),
     createBooking: builder.mutation({
